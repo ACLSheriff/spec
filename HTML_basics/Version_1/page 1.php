@@ -14,17 +14,17 @@ echo "<html>";
         echo "<hr>";
         echo "<p> hello we are asda and we sell ok food, we also fire people </p>";
         echo "<a href='page2.php'> here is our competior </a>";
+        echo "<i> are slogen is That's Asda Price </i>";
 
-        echo "</ol>";
+        echo "<hr>";
+        echo "<p> hello we should not give jobs out and have we do food </p>";
 
-            echo "<ul>";// makea list with numbers
-            echo "<li> we sell </li>";
-            echo "<li> beans </li>";
-            echo "<li> bananas </li>";
-            echo "<li> apples </li>";
-            echo "</ul>";
-
-        echo "</ol>";
+            echo "<ol>";// makea list with numbers
+                echo "<li> we sell </li>";
+                echo "<li> beans </li>";
+                echo "<li> bananas </li>";
+                echo "<li> apples </li>";
+            echo "</ol>";
 
 
     echo "</body>";
