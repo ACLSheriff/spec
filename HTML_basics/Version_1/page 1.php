@@ -31,3 +31,6 @@ echo "<html>";
 
 
     echo "</body>";
+    echo "</html>";
+
+?>
