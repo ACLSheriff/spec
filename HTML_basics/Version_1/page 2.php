@@ -1,17 +1,19 @@
 <?php
     echo "<html>";
         echo "<head>";
+
             echo "<title> this is M&S </title>";
+            echo "<link rel='stylesheet' type='text/css' href='css/page_2.css' />";
 
         echo "</head>";
         echo "<body>";
-
 
             echo "<img src='MandS.jfif'>";
             echo "<hr>";
             echo "<b> hello we are M&S and we are ava and ellies favrouite </b>";
             echo "<a href='page3.php'> here is our competior </a>";
 
+            echo "<hr>";
             if ($_SERVER['REQUEST_METHOD'] === 'POST'){
                 echo "Your name: " . $_POST['name'];
                 echo "<br>";

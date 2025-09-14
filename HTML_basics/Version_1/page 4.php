@@ -4,7 +4,7 @@
     echo "<html>";
     echo "<head>";
         echo "<title> this is Co-op </title>";
-
+        echo "<link rel='stylesheet' type='text/css' href='css/page_4.css' />";
         echo "</head>";
         echo "<body>";
 

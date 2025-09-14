@@ -3,7 +3,7 @@
     echo "<html>";
         echo "<head>";
             echo "<title> This is Tesco </title>";
-
+            echo "<link rel='stylesheet' type='text/css' href='css/page_3.css' />";
         echo "</head>";
         echo "<body>";
 
