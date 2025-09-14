@@ -9,7 +9,7 @@
         echo "<body>";
 
 
-        echo "<img src='Co-op.jfif'>";
+        echo "<img src='Co-Op.jfif'>";
         echo "<hr>";
         echo "<b> hello we are Co-op  </b>";
         echo "<p> we are a competior </p>";

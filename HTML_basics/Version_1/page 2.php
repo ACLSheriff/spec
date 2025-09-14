@@ -8,7 +8,7 @@
         echo "</head>";
         echo "<body>";
 
-            echo "<img src='M&S.jpeg'>";
+            echo "<img src='M&S.jfif'>";
             echo "<hr>";
             echo "<b> hello we are M&S and we are ava and ellies favrouite </b>";
             echo "<a href='page3.php'> here is our competior </a>";

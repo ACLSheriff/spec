@@ -8,7 +8,7 @@
         echo "<body>";
 
 
-            echo "<img src='Tesco_main.png'>";
+            echo "<img src='Tesco_main.jfif'>";
             echo "<hr>";
             echo "<b> hello we are Tesco  </b>";
             echo "<a href='page4.php'> here is our competior </a>";
