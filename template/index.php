@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 echo "<!DOCTYPE html>";/*required tag*/
 echo "<html>";/*opens page content*/
 echo "<head>";/*opens the head of the code */
