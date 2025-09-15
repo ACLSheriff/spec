@@ -5,10 +5,10 @@ echo "<div class='nav'>";
 
         echo "<tr>";  # opens the table row (tr)
 
-            echo "<td class='linkbox'> <a href='About.php'>About</a></td>";
-            echo "<td class='linkbox'> <a href='login.php'>login</a></td>";
             echo "<td class='linkbox'> <a href='index.php'>Home</a></td>";
-            echo "<td class='linkbox'> <a href='signUp.php'>contact</a></td>";
+            echo "<td class='linkbox'> <a href='About.php'>About</a></td>";
+            echo "<td class='linkbox'> <a href='login.php'>Login</a></td>";
+            echo "<td class='linkbox'> <a href='signUp.php'>Contact Us</a></td>";
 
         echo "</tr>";  # closes the row of the table.
 
