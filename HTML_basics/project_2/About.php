@@ -29,6 +29,9 @@ echo "<!DOCTYPE html>";
             echo "<p class='content'> Our aim is to make learning accessible and enjoyable for all students, regardless of their background or learning needs. </p>";
             echo "<br>";
 
+            echo "<img src='images/smiling_student.jpeg'>";
+
+            echo "<br>";
             echo "<h2> What We Offer</h2>";
             echo "<table>";
             echo "<ul>";
@@ -40,3 +43,8 @@ echo "<!DOCTYPE html>";
             echo "<ul>";
             echo "</table>";
 
+            echo "</div>";
+            echo "</div>";
+        echo "</body>";
+    echo "</html>";
+?>
