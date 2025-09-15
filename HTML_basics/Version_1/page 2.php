@@ -8,7 +8,7 @@
         echo "</head>";
         echo "<body>";
 
-            echo "<img id='M&S' src='M&S.jfif'>";// this si an image
+            echo "<img id='mns' src='M&S.jfif'>";// this si an image
             echo "<hr>";// thsi shows a line to break up the page
             echo "<b> hello we are M&S and we are ava and ellies favrouite </b>";// text that is in bold
             echo "<a href='page3.php'> here is our competior </a>";// this links to the next page
