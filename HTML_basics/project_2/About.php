@@ -35,5 +35,8 @@ echo "<!DOCTYPE html>";
             echo "<li> Interactive Tutoring Sessions: Personalized face-to-face tutoring in a range of subjects, from math to languages, to ensure deeper understanding. </li>";
             echo "<li> Digital Learning Resources: Access to a wide array of materials, including videos, quizzes, and exercises to enhance learning. </li>";
             echo "<li> Collaborative Learning Tools: Features that allow students to interact with peers and tutors, encouraging teamwork and shared learning experiences.</li>";
-
+            echo "<li> Progress Monitoring: Tools to track your progress and identify areas for improvement, helping you stay on top of your academic goals.</li>";
+            echo "<li> Accessibility Features: A platform designed to be user-friendly, with accessibility options to support all learners.<li>";
+            echo "<ul>";
+            echo "</table>";
 
