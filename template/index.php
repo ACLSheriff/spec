@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-if ($_SEVER[''])
+if ($_SEVER['REQUEST'])
 
 
 echo "<!DOCTYPE html>";/*required tag*/
