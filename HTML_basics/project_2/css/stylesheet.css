@@ -4,11 +4,11 @@ nav ul {
     padding: 0; /* removes any defult padding*/
     display: flex; /* makes it stacks across*/
     justify-content: flex-start; /* stacks across*/
-    background-color: blue; /*background colour of the page */
+    background-color: lightskyblue; /*background colour of the page */
 }
 
 nav li:hover{/*sets roll over colour for nav bar*/
-    background-color: navy ;/*changes colour when you hold mouse over items*/
+    background-color: dodgerblue ;/*changes colour when you hold mouse over items*/
 }
 
 nav li{  /* creates spceing around items in nav bar*/

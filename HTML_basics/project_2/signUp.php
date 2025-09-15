@@ -17,8 +17,8 @@ require_once "assests/nav_bar.php";// gets and displays nav bar
 
 echo "<div class='content'>";// this class is a box that i can put content for my page into
 
-echo "<h2> Sign Up! </h2>";
-echo "<p> welcome we are so glad your joining us, please fill in the form below </p>";
+echo "<h2> Sign Up! </h2>";//heading
+echo "<p class='content'> welcome we are so glad your joining us, please fill in the form below </p>";//paragh of text to instruct
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){  #selection statement to ensure POST has been used (submit button on a form)
     echo "Your name: " . $_POST['name'];  # uses the full stop to concatenate the text and the post value from the form
@@ -35,17 +35,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){  #selection statement to ensure POST
 }
 
 echo "<br>";
-echo "<form method='post' action=''>";
-echo "<table>";
+echo "<form method='post' action=''>"; //this creates the form
+echo "<table>";// creates a table to lay out the input boxes
 echo "<tr><input type='text' name='name' placeholder='Name' /><input type='email' name='email' placeholder='Email' /></tr>";
-
+//these are put into a table and allows the user to input a type of data of whats required
 echo "<tr><input type='date' name='date' placeholder='Date of birth'  /> <input type='password' name='pwd' placeholder='Password'/></tr>";
 
 echo "<tr><input type='text' name='subject' placeholder='Subject' /><input type='text' name='level' placeholder='Level' /></tr>";
 
-echo "<tr><input type='submit' name='submit' value='submit' /></tr>";
+echo "<tr><input type='submit' name='submit' value='submit' /></tr>";// this allows the user to submit the form
 
-echo "</table>";
+echo "</table>";//end of table and form
 echo "</form>";
 
 

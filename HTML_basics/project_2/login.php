@@ -28,16 +28,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){  #selection statement to ensure POST
 }
 
 echo "<br>";
-echo "<form method='post' action=''>";
-echo "<input type='email' name='email' placeholder='Email' />";
-echo "<br>";
+echo "<form method='post' action=''>";//creates the form
+echo "<input type='email' name='email' placeholder='Email' />";// allows users to enter the seten type of data asked for
+echo "<br>";//breaks to make it more readable
 echo "<input type='password' name='pwd' placeholder='Password' />";
 echo "<br>";
 echo "<input type='password' name='pwd2' placeholder='Confirm Password' />";
 echo "<br>";
-echo "<input type='submit' name='submit' value='submit' />";
+echo "<input type='submit' name='submit' value='submit' />";//button to submit form
 
-echo "</form>";
+echo "</form>";//end of form
 
 
 echo "</div>";//closes each class

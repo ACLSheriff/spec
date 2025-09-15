@@ -1,17 +1,18 @@
 <?php
 
-echo "<div class='nav'>";
-    echo "<table>";  #table used to help with layout of my hyperlinks
 
-        echo "<tr>";  # opens the table row (tr)
+echo "<div class='nav'>";//opens a class called nav
+echo "<nav>";  //used to layout my hyperlinks
 
-            echo "<td class='linkbox'> <a href='index.php'>Home</a></td>";
-            echo "<td class='linkbox'> <a href='About.php'>About</a></td>";
-            echo "<td class='linkbox'> <a href='login.php'>Login</a></td>";
-            echo "<td class='linkbox'> <a href='signUp.php'>Contact Us</a></td>";
+echo "<ul>";  // opens the list
 
-        echo "</tr>";  # closes the row of the table.
+echo "<li> <a href='index.php'>Home</a> </li>";//links of each page that can be displayed to click through
+echo "<li> <a href='About.php'>About</a> </li>";
+echo "<li> <a href='login.php'>Login</a> </li>";
+echo "<li> <a href='signUp.php'></a>SignUp</li>";
 
-    echo "</table>";  # closes the table off
+echo "</ul>";  // closes the row of the list.
 
-echo "</div>";
+echo "</nav>";  // closes off the naviagtion links
+
+echo "</div>";// ends the class so you know what is inside
