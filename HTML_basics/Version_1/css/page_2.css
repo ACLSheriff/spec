@@ -13,6 +13,10 @@ p, input {
     font-size: medium;
 }
 
+#M&S {
+    width: 100px
+}
+
 form {
     background-color: dimgrey;
     border-radius: 8px;
