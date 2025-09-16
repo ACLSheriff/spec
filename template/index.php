@@ -1,8 +1,6 @@
 <?php
 
 session_start();
-if ($_SEVER['REQUEST'])
-
 
 echo "<!DOCTYPE html>";//required tag
 echo "<html>";//opens page content
@@ -20,12 +18,6 @@ require_once "assests/topBar.php";// gets and displays the top bar
 require_once "assests/nav_bar.php";// gets and displays nav bar
 
 echo "<div class='content'>";// this class is a box that i can put content for my page into
-
-echo "<h2> session work </h2>";
-echo "<form method = 'post' action = ''> <br>";
-echo "<input type = 'text' name = 'massage' placeholder='Enter a message here'>";
-echo "<input type = 'submit' name = 'submit' value = 'submit'>";
-echo "</form>";
 
 echo "</div>";//closes each class
 echo "</div>";
