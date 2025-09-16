@@ -21,3 +21,11 @@ nav li{  /* creates spceing around items in nav bar*/
     align-items: center;/*alines items to center*/
     flex-direction: column;/*displays the defult row to coloum*/
 }
+
+#error {
+    background-color: lightcoral ;
+}
+
+#umsg {
+    background-color: lightgreen;
+}
