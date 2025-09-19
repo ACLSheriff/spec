@@ -30,7 +30,7 @@ echo "</form>";
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){// this create a form
     echo " " . $_POST['pwd'];// alows a user to enter there name
 }
-//fuction name ($post[input])
+echo checker($_POST['pwd']);
 
 echo "</div>";//closes each class
 echo "</div>";
