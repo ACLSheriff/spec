@@ -27,7 +27,8 @@ nav li{  /* creates spceing around items in nav bar*/
     background-color: black;
     color: aquamarine;
     width: 100%;
-    font-size: larger;
+    font-size: xx-large;
+    display: flex;
     justify-content: center;/* alines content to center */
     align-items: center;/*alines items to center*/
 
