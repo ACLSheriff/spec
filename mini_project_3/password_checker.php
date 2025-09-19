@@ -2,12 +2,7 @@
 
 session_start();
 
-require_once "assets/checker.php";
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-    $_SESSION['msg'] = $_POST['message'];
-}
+require_once "assests/common.php";
 
 echo "<!DOCTYPE html>";//required tag
 echo "<html>";//opens page content
@@ -26,13 +21,16 @@ require_once "assets/nav.php";// gets and displays nav bar
 
 echo "<div class='content'>";// this class is a box that i can put content for my page into
 
-echo user_msg();
-
 echo "<h2> Check your password: </h2>";
 echo "<form method = 'post' action = ''> <br>";
 echo "<input type = 'text' name = 'pwd' placeholder='password:'>";
 echo "<input type = 'submit' name = 'submit' value = 'submit'>";
 echo "</form>";
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST'){// this create a form
+    echo " " . $_POST['pwd'];// alows a user to enter there name
+}
+//fuction name ($post[input])
 
 echo "</div>";//closes each class
 echo "</div>";

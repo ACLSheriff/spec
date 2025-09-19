@@ -4,11 +4,12 @@ nav ul {
     padding: 0; /* removes any defult padding*/
     display: flex; /* makes it stacks across*/
     justify-content: flex-start; /* stacks across*/
-    background-color: blue; /*background colour of the page */
+    background-color: black; /*background colour of the page */
 }
 
+
 nav li:hover{/*sets roll over colour for nav bar*/
-    background-color: navy ;/*changes colour when you hold mouse over items*/
+    background-color: black ;/*changes colour when you hold mouse over items*/
 }
 
 nav li{  /* creates spceing around items in nav bar*/
@@ -22,3 +23,12 @@ nav li{  /* creates spceing around items in nav bar*/
     flex-direction: column;/*displays the defult row to coloum*/
 }
 
+.topbar {
+    background-color: black;
+    color: aquamarine;
+    width: 100%;
+    font-size: larger;
+    justify-content: center;/* alines content to center */
+    align-items: center;/*alines items to center*/
+
+}
