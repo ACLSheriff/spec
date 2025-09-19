@@ -21,6 +21,6 @@ echo "<div class='content'>";// this class is a box that i can put content for m
 
 echo "</div>";//closes each class
 echo "</div>";
-echo "<body>";// closes the body of code
-echo "<html>";// end of html code
+echo "</body>";// closes the body of code
+echo "</html>";// end of html code
 ?>

@@ -1,6 +1,5 @@
 <?php
 
-
 session_start();
 
 echo "<!DOCTYPE html>";//required tag
@@ -49,19 +48,21 @@ echo "<li> The number of characters is greater than 8 </li>";
 echo "<li> At least one upper case character </li>";
 echo "<li> At least one lower case character </li>";
 echo "<li> At least one special character </li>";
-echo "<li> At least one number is present <li>";
-echo "<li> The first character cannot be a special character <li>";
-echo "<li> The last character cannot be the special character <li>";
-echo "<li> The word “password” cannot be part of the password <li>";
-echo "<li> The first character cannot be a number <li>";
-echo "<ul>";
+echo "<li> At least one number is present </li>";
+echo "<li> The first character cannot be a special character </li>";
+echo "<li> The last character cannot be the special character </li>";
+echo "<li> The word “password” cannot be part of the password </li>";
+echo "<li> The first character cannot be a number </li>";
+echo "<ul>";// end of list
 echo "</table>";//end of table
 
+echo "<br>";
+echo "<img id='text' src='images/password_strength.png' alt='text' />";
 echo "<br>";
 
 echo "</div>";//closes each class
 echo "</div>";
-echo "<body>";// closes the body of code
-echo "<html>";// end of html code
+echo "</body>";// closes the body of code
+echo "</html>";// end of html code
 
 ?>
