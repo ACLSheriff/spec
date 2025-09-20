@@ -2,13 +2,13 @@
 
 session_start();
 
-require_once "assests/common.php";
+require_once "assets/common_.php";
 
 echo "<!DOCTYPE html>";//required tag
 echo "<html>";//opens page content
 echo "<head>";//opens the head of the code
 
-echo "<title> enter title </title>";//titles the page
+echo "<title> password_checker </title>";//titles the page
 echo "<link rel='stylesheet' type='text/css' href='css/stylesheet.css'/>";//links to style sheet
 
 echo "</head>";// closes the head of the page
@@ -16,8 +16,8 @@ echo "<body>";//opens the body of the page
 
 echo "<div class='container'>";//dive alows you to split your page up and class allows you to style that div
 
-require_once "assests/topbar.php";// gets and displays the top bar
-require_once "assests/nav.php";// gets and displays nav bar
+require_once "assets/topbar.php";// gets and displays the top bar
+require_once "assets/nav.php";// gets and displays nav bar
 
 echo "<div class='content'>";// this class is a box that i can put content for my page into
 
@@ -29,13 +29,22 @@ echo "</form>";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){// this create a form
     echo " " . $_POST['pwd'];// alows a user to enter there name
+    echo "<br>";
+    echo len_checker($_POST['pwd']);
+    echo "<br>";
+    echo check_upper($_POST['pwd']);
 }
-echo len_checker($_POST['pwd']);
-echo check_upper($_POST['pwd']);
-echo check_lower($_POST['pwd']);
+
+//require "assets/common.php";
+//require __DIR__ . '/assets/common.php';
+
+//echo len_checker($_POST['pwd']);
+//echo check_upper($_POST['pwd']);
+//echo check_lower($_POST['pwd']);
 
 
 echo "</div>";//closes each class
 echo "</div>";
 echo "<body>";// closes the body of code
 echo "<html>";// end of html code
+?>
