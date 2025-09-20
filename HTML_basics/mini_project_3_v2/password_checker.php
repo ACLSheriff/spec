@@ -32,6 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){// this create a form
 }
 echo len_checker($_POST['pwd']);
 echo check_upper($_POST['pwd']);
+echo check_lower($_POST['pwd']);
+
 
 echo "</div>";//closes each class
 echo "</div>";

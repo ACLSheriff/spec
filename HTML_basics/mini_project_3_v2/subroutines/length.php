@@ -1,5 +1,5 @@
 <?php
-Function len_checker($_POST['pwd']){//creates a function
+function len_checker($_POST['pwd']){//creates a function
 
     $length = strlen($_POST['pwd']);
 
