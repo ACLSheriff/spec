@@ -2,7 +2,7 @@
 
 session_start();
 
-require_once "assets/common.php";
+require_once "assets/common.php";// calls common so we can
 
 echo "<!DOCTYPE html>";//required tag
 echo "<html>";//opens page content
@@ -31,8 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){// this create a form
     echo " " . $_POST['pwd'];// alows a user to enter there name
     echo "<br>";
     echo "<br>";
-    echo len_checker($_POST['pwd']);
-    echo "<br>";
+    echo len_checker($_POST['pwd']);//these will call the fuction in common and check the pwd and output infomation based on
+    echo "<br>";// double breaks to make it more readable so the lines are spaces out making each respnse or sujjestion clear
     echo "<br>";
     echo check_upper($_POST['pwd']);
     echo "<br>";
