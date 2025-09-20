@@ -10,8 +10,6 @@ function len_checker($pwd){//creates a function
     } else {
         return " ";
     }
-
-
 }
 
 
@@ -21,5 +19,5 @@ function check_upper($pwd){
         return '';
     }else{
         return "password should contain uppercase letters.";
-    }
+    }}
 

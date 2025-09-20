@@ -2,7 +2,7 @@
 
 session_start();
 
-require_once "assets/common_.php";
+require_once "assets/common.php";
 
 echo "<!DOCTYPE html>";//required tag
 echo "<html>";//opens page content
@@ -30,17 +30,34 @@ echo "</form>";
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){// this create a form
     echo " " . $_POST['pwd'];// alows a user to enter there name
     echo "<br>";
+    echo "<br>";
     echo len_checker($_POST['pwd']);
     echo "<br>";
+    echo "<br>";
     echo check_upper($_POST['pwd']);
+    echo "<br>";
+    echo "<br>";
+    echo check_lower($_POST['pwd']);
+    echo "<br>";
+    echo "<br>";
+    echo char_special($_POST['pwd']);
+    echo "<br>";
+    echo "<br>";
+    echo check_first_num($_POST['pwd']);
+    echo "<br>";
+    echo "<br>";
+    echo password_check($_POST['pwd']);
+    echo "<br>";
+    echo "<br>";
+    echo digit_check($_POST['pwd']);
+    echo "<br>";
+    echo "<br>";
+    echo check_first_special($_POST['pwd']);
+    echo "<br>";
+    echo "<br>";
+    echo last_special_char($_POST['pwd']);
+
 }
-
-//require "assets/common.php";
-//require __DIR__ . '/assets/common.php';
-
-//echo len_checker($_POST['pwd']);
-//echo check_upper($_POST['pwd']);
-//echo check_lower($_POST['pwd']);
 
 
 echo "</div>";//closes each class

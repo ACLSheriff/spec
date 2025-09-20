@@ -2,14 +2,13 @@
 
 
 
-Function checker(){//creates a function
+function len_checker($pwd){//creates a function
 
-    if(isset($_POST['msg'])){// checks if session messge have been sset
+    $length = strlen($pwd);
 
+    if ($length < 8 ){
+        return "password is too short it should be 8 characters or longer.";
+    } else {
+        return " ";
+    }}
 
-    }
-    else {
-        return "";
-    }
-
-}
