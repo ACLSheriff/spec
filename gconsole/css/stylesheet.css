@@ -4,7 +4,7 @@ nav ul {
     padding: 0; /* removes any defult padding*/
     display: flex; /* makes it stacks across*/
     justify-content: flex-start; /* stacks across*/
-    background-color: mediumpurple; /*background colour of the page */
+    background-color: plum; /*background colour of the page */
 }
 
 nav li:hover{/*sets roll over colour for nav bar*/
