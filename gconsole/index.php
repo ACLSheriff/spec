@@ -2,6 +2,8 @@
 
 session_start();
 
+require_once "assests/dbconnect.php";
+
 echo "<!DOCTYPE html>";//required tag
 echo "<html>";//opens page content
 echo "<head>";//opens the head of the code
@@ -47,6 +49,13 @@ echo "<br>";
 echo "<img id='text' src='images/playinggame.jfif' alt='text' />";  #sets a logo up
 
 echo "<br>";
+
+try{
+    $conn = dbconnect_insert();
+        echo "succsess";
+} catch (PDOException $e) {
+    echo $e->getMessage();
+}
 
 echo "</div>";//closes each class
 echo "</div>";
