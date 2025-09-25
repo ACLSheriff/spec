@@ -15,13 +15,15 @@ nav li{  /* creates spceing around items in nav bar*/
     padding: 5px 20px 5px 20px; /* top right and bottem left*/
 }
 
-
+body {
+    background-color: lightblue;
+}
 .container {
     display: flex;/*sets displays as flexible*/
     justify-content: center;/* alines content to center */
     align-items: center;/*alines items to center*/
     flex-direction: column;/*displays the defult row to coloum*/
-    background-color: lightpink;
+
 }
 .content {
     display: flex;/*sets displays as flexible*/
@@ -33,7 +35,7 @@ nav li{  /* creates spceing around items in nav bar*/
 h2 {
     width: 100%;
     background-color: purple;
-    color: antiquewhite;
+    color: floralwhite;
     display: flex;
     justify-content: center;/* alines content to center */
     align-items: center;/*alines items to center*/
