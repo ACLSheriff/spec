@@ -36,14 +36,21 @@ echo "<br>";
 echo "<form method='post' action=''>"; //this creates the form
 
 echo "<input type='text' name='manufacture' placeholder='manufature' </input>";
+echo "<br>";
 echo "<input type='text' name='c_name' placeholder='c_name' <input/>";
+echo "<br>";
 echo "<input type='text' name='relase_date' placeholder='relase_date' </input>";
+echo "<br>";
 echo "<input type='number' name='controller_no' placeholder='controller_no' <input/>";
+echo "<br>";
 echo "<input type='text' name='bits' placeholder='bits' </input>";
+echo "<br>";
 echo "<input type='submit' name='submit' value='submit' />";
 
 echo "</form>";
 
+echo "<br>";
+echo "<br>";
 
 echo "</div>";//closes each class
 echo "</div>";

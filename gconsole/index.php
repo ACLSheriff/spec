@@ -14,12 +14,12 @@ echo "<body>";//opens the body of the page
 
 echo "<div class='container'>";//dive alows you to split your page up and class allows you to style that div
 
-require_once "assets/topbar.php";// gets and displays the top bar
-require_once "assets/nav.php";// gets and displays nav bar
+require_once "assests/topbar.php";// gets and displays the top bar
+require_once "assests/nav.php";// gets and displays nav bar
 
 echo "<div class='content'>";// this class is a box that i can put content for my page into
 
-echo "<h1> Games Consoles </h1>";
+echo "<h2> Games Consoles </h2>";
 
 echo "<br>";
 
@@ -31,12 +31,13 @@ echo "<br>";
 echo "<table>";//starts a table
 echo "<ul>";//bullit points the list
 //these are all items in the list
-echo "<li> We offer:  </li>";
+echo "<h3> We offer:  </h3>";
+echo "<br>";
 echo "<li> nintendos switch </li>";
 echo "<li> switch 2 </li>";
 echo "<li> Xbox 2 </li>";
-echo "<li> Xbox serise X <li>";
-echo "<li> playstation 1&2 <li>";
+echo "<li> Xbox serise X </li>";
+echo "<li> playstation 1&2 </li>";
 echo "<ul>";
 echo "</table>";//end of table
 

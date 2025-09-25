@@ -7,9 +7,9 @@ echo "<nav>";  //used to layout my hyperlinks
 echo "<ul>";  // opens the list
 
 echo "<li> <a href='index.php'> Home </a> </li>";//links of each page that can be displayed to click through
-echo "<li> <a href='page2.php'>2</a> </li>";
-echo "<li> <a href='page3.php'>3</a> </li>";
-echo "<li> <a href='page4.php'>4</a> </li>";
+echo "<li> <a href='login.php'> Login </a> </li>";
+echo "<li> <a href='register.php'>  User register </a> </li>";
+echo "<li> <a href='register_console.php'> register console </a> </li>";
 
 echo "</ul>";  // closes the row of the list.
 

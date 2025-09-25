@@ -39,6 +39,8 @@ echo "<input type='submit' name='submit' value='submit' />";//button to submit f
 
 echo "</form>";//end of form
 
+echo "<br>";
+echo "<br>";
 
 echo "</div>";//closes each class
 echo "</div>";
