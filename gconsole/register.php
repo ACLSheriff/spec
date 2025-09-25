@@ -37,10 +37,10 @@ echo "<form method='post' action=''>"; //this creates the form
 
 echo "<input type='text' name='usernamename' placeholder='Name' </input>";
 echo "<input type='text' name='sign_up_date' placeholder='date' <input/>";
-echo "<input type='text' name='' placeholder='Name' </input>";
-echo "<input type='email' name='email' placeholder='Email' <input/>";
-echo "<input type='text' name='usernamename' placeholder='Name' </input>";
-echo "<input type='email' name='email' placeholder='Email' <input/>";
+echo "<input type='text' name='password' placeholder='pwd' </input>";
+echo "<input type='email' name='d_o_b' placeholder='d_o_b' <input/>";
+echo "<input type='text' name='country' placeholder='country' </input>";
+echo "<input type='submit' name='submit' value='submit' />";
 
 echo "</form>";
 
