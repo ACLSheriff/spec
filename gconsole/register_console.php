@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once("assests/dbconnect.php");
+require_once("assests/dbconnect.php");//gets file access
 require_once("assests/common.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST"){

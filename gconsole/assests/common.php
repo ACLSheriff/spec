@@ -32,3 +32,25 @@ function user_message(){
         echo"";
     }
 }
+
+function username_check($conn, $post)
+{
+    try{
+        $sql = "SELECT username FROM user where username= (username) Values (?)";
+        $stmt = $conn->prepare($sql);//prepare sql
+        $stmt->bindValue(1, $post['username']);
+        $stmt->execute();
+        $count = null;
+
+
+    }catch (PDOException $e){
+        error_log(" Audit database error:" . $e->getMessage());
+        throw new Exception( "Audit database error: " . $e);
+
+    }catch (Exception $e){//catching errors to make robust and giving error messages
+        error_log(" Audit  error:" . $e->getMessage());
+        throw new Exception( "Audit  error: " . $e);
+    }
+
+
+}
