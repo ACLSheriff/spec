@@ -5,10 +5,10 @@
 function dbconnect_insert()// creates fuction
 {
     $servername = "localhost"; //sets sever name
+//you should not use root to access the database as its full access tempry
+    $dbusername = "root";//gets the user name we need to access the database in the correct way
 
-    $dbusername = "gconsoleinsert";//gets the user name we need to access the database in the correct way
-
-    $dbpassword = "password1G";//password for database useraccont
+    $dbpassword = "";//password for database useraccont
 
     $dbname = "gconsole";// database name to connect to
 

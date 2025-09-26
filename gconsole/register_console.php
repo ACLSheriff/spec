@@ -1,4 +1,17 @@
 <?php
+session_start();
+
+require_once("assests/dbconnect.php");
+require_once("assests/common.php");
+
+if ($_SERVER["REQUEST_METHOD"] == "POST"){
+    try{
+        new_console(dbconnect_insert(), $_POST);
+        $_SESSION['usermessage'] = "SUCESS; Console created!";
+    }catch (PDOException $e){
+        $_SESSION['usermessage'] = $e->getMessage();
+    }
+}
 
 echo "<!DOCTYPE html>";//required tag
 echo "<html>";//opens page content
@@ -33,17 +46,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){  #selection statement to ensure POST
 }
 
 echo "<br>";
+echo user_message();
+echo "<br>";
+
+echo "<br>";
 echo "<form method='post' action=''>"; //this creates the form
 
-echo "<input type='text' name='manufacture' placeholder='manufature' </input>";
+echo "<input type='text' name='manufacturer' placeholder='manufaturer' </input>";
 echo "<br>";
 echo "<input type='text' name='c_name' placeholder='c_name' <input/>";
 echo "<br>";
-echo "<input type='text' name='relase_date' placeholder='relase_date' </input>";
+echo "<input type='text' name='relse_date' placeholder='relse_date' </input>";
 echo "<br>";
 echo "<input type='number' name='controller_no' placeholder='controller_no' <input/>";
 echo "<br>";
-echo "<input type='text' name='bits' placeholder='bits' </input>";
+echo "<input type='text' name='bit' placeholder='bit' </input>";
 echo "<br>";
 echo "<input type='submit' name='submit' value='submit' />";
 
