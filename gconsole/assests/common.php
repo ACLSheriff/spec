@@ -1,6 +1,6 @@
 <?php
 
-function new_console($conn, $post)
+function new_console($conn, $post)//creates fuction
 {
     try{// doing a prepared stament
         $sql = "INSERT INTO console (manufacturer, c_name, relse_date, controller_no, bit) VALUES(?,?,?,?,?)";//easy to sql attack
@@ -18,7 +18,7 @@ function new_console($conn, $post)
         error_log(" Audit database error:" . $e->getMessage());
         throw new Exception( "Audit database error: " . $e);
 
-    }catch (Exception $e){
+    }catch (Exception $e){//catching errors to make robust and giving error messages
         error_log(" Audit  error:" . $e->getMessage());
         throw new Exception( "Audit  error: " . $e);
     }

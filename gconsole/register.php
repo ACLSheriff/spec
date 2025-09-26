@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 echo "<!DOCTYPE html>";//required tag
 echo "<html>";//opens page content
 echo "<head>";//opens the head of the code
@@ -35,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){  #selection statement to ensure POST
 echo "<br>";
 echo "<form method='post' action=''>"; //this creates the form
 
-echo "<input type='text' name='username' placeholder='Name' </input>";
+echo "<input type='text' name='username' placeholder='Name' </input>";//allows intput into form
 echo "<br>";
 echo "<input type='text' name='sign_up_date' placeholder='date' <input/>";
 echo "<br>";
@@ -45,7 +47,7 @@ echo "<input type='text' name='d_o_b' placeholder='d_o_b' <input/>";
 echo "<br>";
 echo "<input type='text' name='country' placeholder='country' </input>";
 echo "<br>";
-echo "<input type='submit' name='submit' value='submit' />";
+echo "<input type='submit' name='submit' value='submit' />";//submit button for form
 
 echo "</form>";
 

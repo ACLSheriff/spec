@@ -23,36 +23,36 @@ echo "<link rel='stylesheet' type='text/css' href='css/stylesheet.css'/>";//link
 echo "</head>";// closes the head of the page
 echo "<body>";//opens the body of the page
 
-echo "<div class='container'>";//dive alows you to split your page up and class allows you to style that div
+echo "<div class='container'>";//dive allows you to split your page up and class allows you to style that div
 
 require_once "assests/topbar.php";// gets and displays the top bar
 require_once "assests/nav.php";// gets and displays nav bar
 
 echo "<div class='content'>";// this class is a box that i can put content for my page into
 
-echo "<h2> User register </h2>";//heading
+echo "<h2> control register </h2>";//heading
 echo "<p> welcome we are so glad your joining us, please fill in the form below </p>";//paragh of text to instruct
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){  #selection statement to ensure POST has been used (submit button on a form)
-    echo "manufacture: " . $_POST['manufacture'];  # uses the full stop to concatenate the text and the post value from the form
+    echo "manufacturer: " . $_POST['manufacturer'];  # uses the full stop to concatenate the text and the post value from the form
     echo "<br>";
     echo "c_name: "  . $_POST['c_name'];
     echo "<br>";
-    echo "relase_date: "  . $_POST['relse_date'];
+    echo "relse_date: "  . $_POST['relse_date'];
     echo "<br>";
-    echo "controller_no: "  . $_POST['ctrl_no'];
+    echo "controller_no: "  . $_POST['controller_no'];
     echo "<br>";
     echo "bits : "  . $_POST['bit'];
 }
 
 echo "<br>";
-echo user_message();
+echo user_message();//calls the function
 echo "<br>";
 
 echo "<br>";
 echo "<form method='post' action=''>"; //this creates the form
 
-echo "<input type='text' name='manufacturer' placeholder='manufaturer' </input>";
+echo "<input type='text' name='manufacturer' placeholder='manufaturer' </input>";// allows inputs into form
 echo "<br>";
 echo "<input type='text' name='c_name' placeholder='c_name' <input/>";
 echo "<br>";
@@ -62,7 +62,7 @@ echo "<input type='number' name='controller_no' placeholder='controller_no' <inp
 echo "<br>";
 echo "<input type='text' name='bit' placeholder='bit' </input>";
 echo "<br>";
-echo "<input type='submit' name='submit' value='submit' />";
+echo "<input type='submit' name='submit' value='submit' />";//button to submit form
 
 echo "</form>";
 
