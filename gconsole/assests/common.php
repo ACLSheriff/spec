@@ -59,3 +59,31 @@ function username_check($conn, $username)
 
 
 }
+function reg_user($conn, $post)
+{
+        try{
+            $sql = "INSERT INTO user (username, password, sign_up_date, d_o_b, country) VALUES(?,?,?,?,?)";//prepare for sqp quary
+            $stmt = $conn->prepare($sql);//prepare sql
+
+            $stmt->bindValue(1, $post['username']);//bind paramiters for security
+            $hpswd = password_hash($post['password'], PASSWORD_DEFAULT);//built in libray to incrypt to hash the password
+            //we have to use the defult algrythem as there is no other built in encryption
+            //so if this was a production we may use PASSWORd_BCRYPT or PASSWORD_ARGON2I to make encryption more secure
+            $stmt->bindValue(2, $hpswd);
+            $stmt->bindValue(3, $post['sign_up_date']);
+            $stmt->bindValue(4, $post['d_o_b']);
+            $stmt->bindValue(5, $post['country']);
+
+            $stmt->execute();//run quary to insert
+            $conn = null;// closes connection for security
+            return true;// reg succsessful
+        }catch (Exception $e){// handle database error
+            error_log(" user database error:" . $e->getMessage());//log the error
+            throw new Exception( "user database error: " . $e);//throw exception
+
+        }catch (Exception $e){//handle validation or other errors
+            error_log(" user reg error:" . $e->getMessage());//log error
+            throw new Exception( "user reg error: " . $e->getMessage());//throw exception
+        }
+
+}

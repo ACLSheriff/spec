@@ -5,9 +5,18 @@ session_start();
 require_once("assests/dbconnect.php");//gets file access
 require_once("assests/common.php");//gets acess to common
 
-if ($_SERVER["REQUEST_METHOD"] == "POST"){//checking a super globle to see if the request methord is post to call the page
+if ($_SERVER["REQUEST_METHOD"] == "POST") {//checking a super globle to see if the request methord is post to call the page
 
-        $_SESSION['usermessage'] = "result of user check:". username_check(dbconnect_insert(), $_POST["username"]);//gives and formats the resutle of the check from common username_check
+    if (!username_check(dbconnect_insert(), $_POST["username"])) {//checks the value returned to see if username id avalible
+
+        if (reg_user(dbconnect_insert(), $_POST)) ;
+
+        $_SESSION['usermessage'] = "USER REG SUCCESSFUL";//gives and formats the resutle of the check from common username_check
+    } else {
+        $_SESSION['usermessage'] = "ERROR USER REG FAILED ";//if its not aviblibe it prints this error message
+    }
+
+
 
 }
 
