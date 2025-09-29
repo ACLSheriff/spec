@@ -50,6 +50,8 @@ echo "<img id='text' src='images/playinggame.jfif' alt='text' />";  #sets a logo
 
 echo "<br>";
 
+echo user_message();
+
 try{//error handle
     $conn = dbconnect_insert();
         echo "succsess";//if it works prints succsess message

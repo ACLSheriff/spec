@@ -1,48 +1,30 @@
 <?php
 
-echo "<!DOCTYPE html>";//required tag
-echo "<html>";//opens page content
-echo "<head>";//opens the head of the code
+session_start();
 
-echo "<title> games consoles </title>";//titles the page
-echo "<link rel='stylesheet' type='text/css' href='css/stylesheet.css'/>";//links to style sheet
+require_once "assests/dbconnect.php";
+require_once "assests/common.php";
 
-echo "</head>";// closes the head of the page
-echo "<body>";//opens the body of the page
-
-echo "<div class='container'>";//dive alows you to split your page up and class allows you to style that div
-
-require_once "assests/topbar.php";// gets and displays the top bar
-require_once "assests/nav.php";// gets and displays nav bar
-
-echo "<div class='content'>";// this class is a box that i can put content for my page into
-
-echo "<h2> Welcome Back! </h2>";
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST'){  #selection statement to ensure POST has been used (submit button on a form)
-    echo "enter your email: "  . $_POST['email'];  # uses the full stop to concatenate the text and the post value from the form
-    echo "<br>";
-    echo "enter your password: "  . $_POST['pwd'];
-    echo "<br>";
-    echo "confirm password: "  . $_POST['pwd2'];
+if (isset($_SESSION['user'])) {
+    $_SESSION['usermessage'] = "you are already logged in";///checks if user is already logged in and will return message if so
+    header("location:index.php");//returns to home page
+    exit;//stop further exicution
 }
 
-echo "<br>";
-echo "<form method='post' action=''>";//creates the form
-echo "<input type='email' name='email' placeholder='Email' />";// allows users to enter the seten type of data asked for
-echo "<br>";//breaks to make it more readable
-echo "<input type='password' name='pwd' placeholder='Password' />";
-echo "<br>";
-echo "<input type='password' name='pwd2' placeholder='Confirm Password' />";
-echo "<br>";
-echo "<input type='submit' name='submit' value='submit' />";//button to submit form
+elseif ($_SERVER["REQUEST_METHOD"] === "POST") {//verifys the function
+    $usr = login(dbconnect_insert(),$_POST);//calls login fuction
 
-echo "</form>";//end of form
+    if($usr && password_verify($_POST["password"],$usr["password"])){// checking the username and password match and is present
+        $_SESSION["user"] = true;//sets up the session veriable
+        $_SESSION['user_id'] = $usr["user_id"];//sets and store user id
+        $_SESSION['usermessage'] = "SUCCESSFULLY LOGGED IN";//success message
+        header("location:index.php");//send back to home page
+        exit;//exits page ends code
+    }else{//if username isnt valid
+        $_SESSION["usermessage"] = "INVALID USERNAME OR PASSWORD";//send error mesasge to be printed
+        header("location:login.php");//gose back to login page
+        exit;//ends code
+    }
+}
 
-echo "<br>";
-echo "<br>";
-
-echo "</div>";//closes each class
-echo "</div>";
-echo "<body>";// closes the body of code
-echo "<html>";// end of html code
+echo "<!DOCTYPE html>";//required tag
