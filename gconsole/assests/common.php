@@ -24,32 +24,37 @@ function new_console($conn, $post)//creates fuction
     }
 }
 
-function user_message(){
-    if(isset($_SESSION['usermessage'])){
-        echo "<p>" . $_SESSION['usermessage']."</p>";
-        unset($_SESSION['usermessage']);
-    }else{
-        echo"";
+function user_message()
+{
+    if(isset($_SESSION['usermessage'])){//check if message set
+        $message = "<p>". $_SESSION['usermessage']."</p>";//assinges the massage and styles
+        unset($_SESSION['usermessage']);//unsets message
+        return $message;//return message
+    }else{//if not met
+        $message = "";//set to blank
+        return $message;//returns message
     }
+
 }
 
-function username_check($conn, $post)
+function username_check($conn, $username)
 {
     try{
-        $sql = "SELECT username FROM user where username= (username) Values (?)";
+        $sql = "SELECT username FROM user where username= ?";//sql stament getting usernames from database
         $stmt = $conn->prepare($sql);//prepare sql
-        $stmt->bindValue(1, $post['username']);
-        $stmt->execute();
-        $count = null;
-
-
-    }catch (PDOException $e){
-        error_log(" Audit database error:" . $e->getMessage());
-        throw new Exception( "Audit database error: " . $e);
+        $stmt->bindValue(1, $username);//subbmits paramitter so its secure
+        $stmt->execute();//run sql code
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);//brings back results
+        $conn = null;// stops the connection so more secure
+        if ($result){//checks if got anything back
+            return true;
+        }else {
+            return false;
+        }
 
     }catch (Exception $e){//catching errors to make robust and giving error messages
-        error_log(" Audit  error:" . $e->getMessage());
-        throw new Exception( "Audit  error: " . $e);
+        error_log(" Audit  error:" . $e->getMessage());//logs error
+        throw  $e;//throw the exception
     }
 
 

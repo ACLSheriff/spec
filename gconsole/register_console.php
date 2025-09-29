@@ -4,12 +4,12 @@ session_start();
 require_once("assests/dbconnect.php");//gets file access
 require_once("assests/common.php");
 
-if ($_SERVER["REQUEST_METHOD"] == "POST"){
+if ($_SERVER["REQUEST_METHOD"] == "POST"){//checking a super globle to see if the request methord is post to call the page
     try{
-        new_console(dbconnect_insert(), $_POST);
-        $_SESSION['usermessage'] = "SUCESS; Console created!";
-    }catch (PDOException $e){
-        $_SESSION['usermessage'] = $e->getMessage();
+        new_console(dbconnect_insert(), $_POST);//calls the code funtion
+        $_SESSION['usermessage'] = "SUCESS; Console created!";//formats the result of the code to outputif it works
+    }catch (PDOException $e){//catches an error if its not correct
+        $_SESSION['usermessage'] = $e->getMessage();//will formatt and print error message
     }
 }
 
@@ -30,24 +30,9 @@ require_once "assests/nav.php";// gets and displays nav bar
 
 echo "<div class='content'>";// this class is a box that i can put content for my page into
 
-echo "<h2> control register </h2>";//heading
+echo "<h2> Console register </h2>";//heading
 echo "<p> welcome we are so glad your joining us, please fill in the form below </p>";//paragh of text to instruct
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST'){  #selection statement to ensure POST has been used (submit button on a form)
-    echo "manufacturer: " . $_POST['manufacturer'];  # uses the full stop to concatenate the text and the post value from the form
-    echo "<br>";
-    echo "c_name: "  . $_POST['c_name'];
-    echo "<br>";
-    echo "relse_date: "  . $_POST['relse_date'];
-    echo "<br>";
-    echo "controller_no: "  . $_POST['controller_no'];
-    echo "<br>";
-    echo "bits : "  . $_POST['bit'];
-}
-
-echo "<br>";
-echo user_message();//calls the function
-echo "<br>";
 
 echo "<br>";
 echo "<form method='post' action=''>"; //this creates the form
@@ -67,6 +52,13 @@ echo "<input type='submit' name='submit' value='submit' />";//button to submit f
 echo "</form>";
 
 echo "<br>";
+
+
+echo "<br>";
+echo user_message();//calls the function
+echo "<br>";
+
+
 echo "<br>";
 
 echo "</div>";//closes each class
