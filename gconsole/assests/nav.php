@@ -10,6 +10,7 @@ echo "<li> <a href='index.php'> Home </a> </li>";//links of each page that can b
 echo "<li> <a href='login.php'> Login </a> </li>";
 echo "<li> <a href='register.php'>  User register </a> </li>";
 echo "<li> <a href='register_console.php'> register console </a> </li>";
+echo "<li> <a href='logout.php'> Logout </a></li>";
 
 echo "</ul>";  // closes the row of the list.
 

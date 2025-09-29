@@ -91,7 +91,7 @@ function reg_user($conn, $post)
 function login($conn, $post)
 {
     try {// try this code
-        $conn = dbconnect_select();//gets database
+        $conn = dbconnect_insert();//gets database
         $sql = "SELECT * FROM user WHERE username= ?";//set up sql statments
         $stmt = $conn->prepare($sql);//prepares sql quary
         $stmt->bindValue(1, $post['username']);//binds paramiter to execute

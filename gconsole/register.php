@@ -16,8 +16,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {//checking a super globle to see if t
         $_SESSION['usermessage'] = "ERROR USER REG FAILED ";//if its not aviblibe it prints this error message
     }
 
-
-
 }
 
 echo "<!DOCTYPE html>";//required tag
