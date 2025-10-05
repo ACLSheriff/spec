@@ -21,19 +21,20 @@ require_once "assests/navbar.php";// gets and displays nav bar
 
 echo "<div class='content'>";// this class is a box that i can put content for my page into
 
-
+echo "<h2> Primary Oaks Surgery </h2>";
 echo "<h2> Booking system </h2>";
 
 echo "<br>";
 //paragh text
-echo "<p> Looking for the ultimate gaming experience? Game consoles offer powerful performance, exclusive games, and easy plug-and-play fun for all ages. </p>";
-echo "<p> Whether you're into solo adventures, online battles, or family game nights, a console is your all-in-one entertainment hub. </p>";
-
+echo "<p> As part of our ongoing commitment to improving patient care and access to healthcare services, </p>";
+echo "<p> Primary Oaks Surgery is introducing a new online appointment booking system </p>";
+echo "<p> you can book appointments online quickly and securely from your computer, tablet, or smartphone—24/7. </p>"
+echo "<p> you will be able to Book, view or cancel appointments </p>";
 
 echo "<br>";
 echo "<br>";//breaks for readablity
 
-echo "<img id='text' src='images/playinggame.jfif' alt='text' />";  #sets a logo up
+//echo "<img id='text' src='images/text.jfif' alt='text' />";
 
 echo "<br>";
 

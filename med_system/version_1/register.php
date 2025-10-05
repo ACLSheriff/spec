@@ -15,7 +15,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {//checking a super globle to see if t
     } else {
         $_SESSION['usermessage'] = "ERROR USER REG FAILED ";//if its not aviblibe it prints this error message
     }
-
 }
 
 echo "<!DOCTYPE html>";//required tag
@@ -42,6 +41,8 @@ echo "<p> welcome we are so glad your joining us, please fill in the form below 
 echo "<br>";// breaks for readability
 echo "<form method='post' action=''>"; //this creates the form
 
+echo "<input type='text' name='username' placeholder='username' </input>";
+echo "<br>";
 echo "<input type='text' name='first_name' placeholder='first_name' </input>";//allows intput into form
 echo "<br>";
 echo "<input type='text' name='surname' placeholder='surname' <input/>";
