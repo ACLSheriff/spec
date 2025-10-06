@@ -1,14 +1,10 @@
 <?php
 
-
-require_once "assests/dbconnect.php";//gets file dbconnect
-require_once "assests/common.php";
-
 echo "<!DOCTYPE html>";//required tag
 echo "<html>";//opens page content
 echo "<head>";//opens the head of the code
 
-echo "<title> games console </title>";//titles the page
+echo "<title> booking </title>";//titles the page
 echo "<link rel='stylesheet' type='text/css' href='css/stylesheet.css'/>";//links to style sheet
 
 echo "</head>";// closes the head of the page
@@ -56,3 +52,4 @@ echo "</div>";//closes each class
 echo "</div>";
 echo "</body>";// closes the body of code
 echo "</html>";// end of html code
+?>

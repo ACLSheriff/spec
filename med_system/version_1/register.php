@@ -30,7 +30,7 @@ echo "<body>";//opens the body of the page
 echo "<div class='container'>";//dive alows you to split your page up and class allows you to style that div
 
 require_once "assests/topbar.php";// gets and displays the top bar
-require_once "assests/nav.php";// gets and displays nav bar
+require_once "assests/navbar.php";// gets and displays nav bar
 
 echo "<div class='content'>";// this class is a box that i can put content for my page into
 
@@ -43,7 +43,7 @@ echo "<form method='post' action=''>"; //this creates the form
 
 echo "<input type='text' name='username' placeholder='username' </input>";
 echo "<br>";
-echo "<input type='text' name='first_name' placeholder='first_name' </input>";//allows intput into form
+echo "<input type='text' name='firstname' placeholder='first_name' </input>";//allows intput into form
 echo "<br>";
 echo "<input type='text' name='surname' placeholder='surname' <input/>";
 echo "<br>";
@@ -51,7 +51,7 @@ echo "<input type='text' name='password' placeholder='password' </input>";
 echo "<br>";
 echo "<input type='text' name='d_o_b' placeholder='date of birth' <input/>";
 echo "<br>";
-echo "<input type='text' name='address' placeholder='address' </input>";
+echo "<input type='text' name='adress' placeholder='address' </input>";
 echo "<br>";
 echo "<input type='submit' name='submit' value='submit' />";//submit button for form
 
