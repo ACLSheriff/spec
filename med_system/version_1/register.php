@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {//checking a super globle to see if t
 
     if (!username_check(dbconnect_insert(), $_POST["username"])) {//checks the value returned to see if username id avalible
 
-        if (reg_user(dbconnect_insert(), $_POST)) ;
+        if (new_user(dbconnect_insert(), $_POST)) ;
 
         $_SESSION['usermessage'] = "USER REG SUCCESSFUL";//gives and formats the resutle of the check from common username_check
     } else {
@@ -43,7 +43,7 @@ echo "<form method='post' action=''>"; //this creates the form
 
 echo "<input type='text' name='username' placeholder='username' </input>";
 echo "<br>";
-echo "<input type='text' name='firstname' placeholder='first_name' </input>";//allows intput into form
+echo "<input type='text' name='first_name' placeholder='first_name' </input>";//allows intput into form
 echo "<br>";
 echo "<input type='text' name='surname' placeholder='surname' <input/>";
 echo "<br>";

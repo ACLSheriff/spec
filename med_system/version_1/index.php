@@ -24,7 +24,7 @@ echo "<br>";
 //paragh text
 echo "<p> As part of our ongoing commitment to improving patient care and access to healthcare services, </p>";
 echo "<p> Primary Oaks Surgery is introducing a new online appointment booking system </p>";
-echo "<p> you can book appointments online quickly and securely from your computer, tablet, or smartphone—24/7. </p>"
+echo "<p> you can book appointments online quickly and securely from your computer, tablet, or smartphone—24/7. </p>";
 echo "<p> you will be able to Book, view or cancel appointments </p>";
 
 echo "<br>";
@@ -33,13 +33,6 @@ echo "<br>";//breaks for readablity
 //echo "<img id='text' src='images/text.jfif' alt='text' />";
 
 echo "<br>";
-
-if (!$message) {//checks message
-    echo user_message();//print out message from subroutine
-}else {
-    echo $message;//prints message
-}
-
 
 try{//error handle
     $conn = dbconnect_insert();
