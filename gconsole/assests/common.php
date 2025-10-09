@@ -115,7 +115,7 @@ function login($conn, $post)
 
 function auditor($conn, $userid, $code, $long)
 {
-    $sql = "INSERT INTO audit (date,user_id,code,longdesc) VALUES(?,?,?,?)";
+    $sql = "INSERT INTO audit (date,user_id,code,longdesc) VALUES(?,?,?,?)";//is an SQL quary that will insert the data into each coloum of the table
     $stmt = $conn->prepare($sql);  //prepare the SQL
     $date = date("Y-m-d"); //this is the the structer a my sQl feild works and accespts
     $stmt->bindValue(1, $date);  //bind paramiters for security
@@ -131,10 +131,10 @@ function auditor($conn, $userid, $code, $long)
 
 function getnewuserid($conn, $username){
     $sql = "SELECT user_id FROM user WHERE username= ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bindValue(1, $username);
-    $stmt->execute();
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    $conn = null;
-    return $result["user_id"];
+    $stmt = $conn->prepare($sql); //prepares SQL
+    $stmt->bindValue(1, $username);   //binds paramiters for security
+    $stmt->execute(); //run quary to insert
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);  //brings array back from database
+    $conn = null; //closes connection
+    return $result["user_id"];  //returns result
 }
