@@ -113,7 +113,7 @@ function login($conn, $post)
     }
 }
 
-function auditor ($conn, $userid, $code, $long)
+function auditor($conn, $userid, $code, $long)
 {
     $sql = "INSERT INTO audit (date,user_id,code,longdesc) VALUES(?,?,?,?)";
     $stmt = $conn->prepare($sql);  //prepare the SQL

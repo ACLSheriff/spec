@@ -8,6 +8,7 @@ require_once("assests/common.php");
 if ($_SERVER["REQUEST_METHOD"] == "POST"){//checking a super globle to see if the request methord is post to call the page
     try{
         new_console(dbconnect_insert(), $_POST);//calls the code funtion
+        auditor(dbconnect_insert(),$_SESSION['user'],"log", "console successfully registered");
         $_SESSION['usermessage'] = "SUCESS; Console created!";//formats the result of the code to outputif it works
     }catch (PDOException $e){//catches an error if its not correct
         $_SESSION['usermessage'] = $e->getMessage();//will formatt and print error message
