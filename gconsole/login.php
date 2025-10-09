@@ -59,7 +59,8 @@ echo "<input type='submit' name='submit' value='submit' />";//submit button for 
 
 echo "</form>";//end form
 
-
+echo "<br>";
+echo user_message();//calls the function
 echo "<br>";
 echo "<br>";
 

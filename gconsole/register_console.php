@@ -4,6 +4,7 @@ session_start();
 require_once("assests/dbconnect.php");//gets file access
 require_once("assests/common.php");
 
+
 if ($_SERVER["REQUEST_METHOD"] == "POST"){//checking a super globle to see if the request methord is post to call the page
     try{
         new_console(dbconnect_insert(), $_POST);//calls the code funtion
