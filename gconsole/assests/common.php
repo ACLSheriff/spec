@@ -112,3 +112,29 @@ function login($conn, $post)
         exit();//exits code
     }
 }
+
+function auditor ($conn, $userid, $code, $long)
+{
+    $sql = "INSERT INTO audit (date,user_id,code,longdesc) VALUES(?,?,?,?)";
+    $stmt = $conn->prepare($sql);  //prepare the SQL
+    $date = date("Y-m-d"); //this is the the structer a my sQl feild works and accespts
+    $stmt->bindValue(1, $date);  //bind paramiters for security
+    $stmt->bindValue(2, $userid);
+    $stmt->bindValue(3, $code);
+    $stmt->bindValue(4, $long);
+
+    $stmt->execute(); //run the query to insert
+    $conn = null;  // close the connection so cant be abused
+    return true;  // registration successful
+
+}
+
+function getnewuserid($conn, $username){
+    $sql = "SELECT user_id FROM user WHERE username= ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(1, $username);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $conn = null;
+    return $result["user_id"];
+}

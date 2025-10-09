@@ -18,6 +18,7 @@ elseif ($_SERVER["REQUEST_METHOD"] === "POST") {//verifys the function
         $_SESSION["user"] = true;//sets up the session veriable
         $_SESSION['user_id'] = $usr["user_id"];//sets and store user id
         $_SESSION['usermessage'] = "SUCCESSFULLY LOGGED IN";//success message
+        auditor(dbconnect_insert(),$_SESSION['user'],"log", "user has successfully logged in");
         header("location:index.php");//send back to home page
         exit;//exits page ends code
     }else{//if username isnt valid
