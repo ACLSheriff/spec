@@ -7,6 +7,13 @@ require_once("assests/common.php");//gets acess to common
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {//checking a super globle to see if the request methord is post to call the page
 
+    echo filter_var($_POST['username'], FILTER_SANITIZE_STRING);
+    echo filter_var($_POST['first_name'], FILTER_SANITIZE_STRING);
+    echo filter_var($_POST['surname'], FILTER_SANITIZE_STRING);
+    echo filter_var($_POST['password'], FILTER_SANITIZE_STRING);
+    echo filter_var($_POST['d_o_b'], FILTER_SANITIZE_STRING);
+    echo filter_var($_POST['adress'], FILTER_SANITIZE_STRING);
+
     if (!username_check(dbconnect_insert(), $_POST["username"])) {//checks the value returned to see if username id avalible
 
         if (new_user(dbconnect_insert(), $_POST)) ;
@@ -15,7 +22,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {//checking a super globle to see if t
     } else {
         $_SESSION['usermessage'] = "ERROR USER REG FAILED ";//if its not aviblibe it prints this error message
     }
-
 }
 
 echo "<!DOCTYPE html>";//required tag
@@ -50,7 +56,7 @@ echo "<input type='text' name='surname' placeholder='surname' <input/>";
 echo "<br>";
 echo "<input type='text' name='password' placeholder='password' </input>";
 echo "<br>";
-echo "<input type='text' name='d_o_b' placeholder='date of birth' <input/>";
+echo "<input type='date' name='d_o_b' placeholder='date of birth' <input/>";
 echo "<br>";
 echo "<input type='text' name='adress' placeholder='address' </input>";
 echo "<br>";
