@@ -3,15 +3,16 @@
 function new_user($conn, $post)//creates fuction
 {
     try{// doing a prepared stament
-        $sql = "INSERT INTO user (first_name, surname, username,password, d_o_b, adress) VALUES(?,?,?,?,?,?)";//easy to sql attack
+        $sql = "INSERT INTO users (first_name, surname, username,password, d_o_b, adress) VALUES(?,?,?,?,?,?)";//easy to sql attack
         $stmt = $conn->prepare($sql);//prepare sql
 
         $stmt->bindValue(1, $post['first_name']);
         $stmt->bindValue(2, $post['surname']);
         $stmt->bindValue(3, $post['username']);
         $hpswd = password_hash($post['password'], PASSWORD_DEFAULT);//built in libray to incrypt
+        $stmt->bindValue(4, $hpswd);
         $stmt->bindValue(5, $post['d_o_b']);
-        $stmt->bindValue(5, $post['adress']);// binding the data from form to SQL statment this makes it more secure from a SQL injection attack less likly to hijk
+        $stmt->bindValue(6, $post['adress']);// binding the data from form to SQL statment this makes it more secure from a SQL injection attack less likly to hijk
 
         $stmt->execute();// run the query to insert
         $conn = null;// gets rid of connection to make sure no open connection which is secrity breach
@@ -41,7 +42,7 @@ function user_message()
 function username_check($conn, $username)
 {
     try {
-        $sql = "SELECT username FROM user where username= ?";//sql stament getting usernames from database
+        $sql = "SELECT username FROM users where username= ?";//sql stament getting usernames from database
         $stmt = $conn->prepare($sql);//prepare sql
         $stmt->bindValue(1, $username);//subbmits paramitter so its secure
         $stmt->execute();//run sql code
@@ -66,7 +67,7 @@ function login($conn, $post)
 {
     try {// try this code
         $conn = dbconnect_insert();//gets database
-        $sql = "SELECT * FROM user WHERE username= ?";//set up sql statments
+        $sql = "SELECT * FROM users WHERE username= ?";//set up sql statments
         $stmt = $conn->prepare($sql);//prepares sql quary
         $stmt->bindValue(1, $post['username']);//binds paramiter to execute
         $stmt->execute();//run from sql code
@@ -104,7 +105,7 @@ function auditor($conn, $userid, $code, $long)
 }
 
 function getnewuserid($conn, $username){
-    $sql = "SELECT user_id FROM user WHERE username= ?";
+    $sql = "SELECT user_id FROM users WHERE username= ?";
     $stmt = $conn->prepare($sql); //prepares SQL
     $stmt->bindValue(1, $username);   //binds paramiters for security
     $stmt->execute(); //run quary to insert

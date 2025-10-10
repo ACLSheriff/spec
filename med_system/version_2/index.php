@@ -1,5 +1,16 @@
 <?php
 
+
+if (!isset($_GET['message'])) {//checks if message is set
+    session_start();//will allow session to start
+    $message = false;//and send a message
+} else {//error handle
+    $message = htmlspecialchars(urldecode($_GET["message"]));//will decode message into string
+}
+
+require_once "assests/dbconnect.php";//gets file dbconnect
+require_once "assests/common.php";
+
 echo "<!DOCTYPE html>";//required tag
 echo "<html>";//opens page content
 echo "<head>";//opens the head of the code
@@ -33,6 +44,15 @@ echo "<br>";//breaks for readablity
 //echo "<img id='text' src='images/text.jfif' alt='text' />";
 
 echo "<br>";
+
+
+if (!$message) {//checks message
+    echo user_message();//print out message from subroutine
+}else {
+    echo $message;//prints message
+}
+
+
 
 try{//error handle
     $conn = dbconnect_insert();
