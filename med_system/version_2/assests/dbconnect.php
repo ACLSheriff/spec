@@ -22,3 +22,4 @@ function dbconnect_insert()// creates fuction
         throw $e;// outputs the error
     }
 }
+

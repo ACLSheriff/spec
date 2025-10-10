@@ -60,3 +60,55 @@ function username_check($conn, $username)
 
 
 }
+
+
+function login($conn, $post)
+{
+    try {// try this code
+        $conn = dbconnect_insert();//gets database
+        $sql = "SELECT * FROM user WHERE username= ?";//set up sql statments
+        $stmt = $conn->prepare($sql);//prepares sql quary
+        $stmt->bindValue(1, $post['username']);//binds paramiter to execute
+        $stmt->execute();//run from sql code
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);//brings back resuts
+        $conn = null;//stops connection
+
+        if ($result) {//if there is a result returned
+            return $result;//returns result
+        } else {
+            $_SESSION['usermessage'] = "User not found";//send message from error to be printed
+            header("Location: login.php");//send back to login page
+            exit();//exits code
+        }
+    } catch (PDOException $e) {
+        $_SESSION['usermessage'] = "User login".$e->getMessage();//returns error mesage to output
+        header("Location: login.php");//send back to long in page
+        exit();//exits code
+    }
+}
+
+function auditor($conn, $userid, $code, $long)
+{
+    $sql = "INSERT INTO audit (date,user_id,code,longdesc) VALUES(?,?,?,?)";//is an SQL quary that will insert the data into each coloum of the table
+    $stmt = $conn->prepare($sql);  //prepare the SQL
+    $date = date("Y-m-d"); //this is the the structer a my sQl feild works and accespts
+    $stmt->bindValue(1, $date);  //bind paramiters for security
+    $stmt->bindValue(2, $userid);
+    $stmt->bindValue(3, $code);
+    $stmt->bindValue(4, $long);
+
+    $stmt->execute(); //run the query to insert
+    $conn = null;  // close the connection so cant be abused
+    return true;  // registration successful
+
+}
+
+function getnewuserid($conn, $username){
+    $sql = "SELECT user_id FROM user WHERE username= ?";
+    $stmt = $conn->prepare($sql); //prepares SQL
+    $stmt->bindValue(1, $username);   //binds paramiters for security
+    $stmt->execute(); //run quary to insert
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);  //brings array back from database
+    $conn = null; //closes connection
+    return $result["user_id"];  //returns result
+}
