@@ -13,7 +13,7 @@ if (isset($_SESSION['user'])) {
 
 elseif ($_SERVER["REQUEST_METHOD"] === "POST") {//verifys the function
 
-    $_POST['username'] = filter_var($_POST['username'], FILTER_SANITIZE_EMAIL);
+    $_POST['username'] = filter_var($_POST['username'], FILTER_SANITIZE_EMAIL);//filters input for security
     $_POST['password'] = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
 
     $usr = login(dbconnect_insert(),$_POST);//calls login fuction

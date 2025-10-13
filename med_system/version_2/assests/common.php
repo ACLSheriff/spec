@@ -126,16 +126,16 @@ function getnewuserid($conn, $username)
 
 function password_streagth($pwd){
 
-    $checker = 0;
-    $results = array();
+    $checker = 0;//this allows us to check if all subroutines are correct
+    $results = array();//allows us to collect error messages to print
 
 
-    $tmp = len_checker($pwd);
-    $checker+=$tmp;
-    if ($tmp==1){
-        $results["len"] = "SUCCESS: Length Check Passed";
+    $tmp = len_checker($pwd);//calls subroutine
+    $checker+=$tmp;//adds the reterned value to checker
+    if ($tmp==1){//if returned value is 1
+        $results["len"] = "SUCCESS: Length Check Passed";// will add success message
     } else {
-        $results["len"] = "FAILED: Length Check FAILED";
+        $results["len"] = "FAILED: Length Check FAILED";//otherwise will have error
     }
 
     $tmp = check_upper($pwd);
@@ -194,11 +194,11 @@ function password_streagth($pwd){
         $results["len"] = "FAILED: first letter special charecter Check FAILED";
     }
 
-    if ($checker > 7) {
-        return true;
+    if ($checker > 7) {//checks if all 7 subroutines where correct
+        return true;//if they are will return true
     }else{
         $_SESSION['usermessage'] = "your password has failed 1 or more complexity tests ";
-        return false;
+        return false;//if not will return false and will send error message to print
     }
 
 

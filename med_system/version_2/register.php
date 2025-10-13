@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {//checking a super globle to see if t
     $_POST['adress'] = filter_var($_POST['adress'], FILTER_SANITIZE_STRING);
 
 
-   if (password_streagth($_POST['password'])) {
+   if (password_streagth($_POST['password'])) {//checks the password has met all requrements
 
       if (!username_check(dbconnect_insert(), $_POST['username'])) {//checks the value returned to see if username id avalible
             if (new_user(dbconnect_insert(), $_POST)) {
@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {//checking a super globle to see if t
                 $_SESSION['usermessage'] = "ERROR USER REG FAILED ";//if its not aviblibe it prints this error message
             }
         }
-    } else {
+    } else {// handles if password has not met all requiremts
         $_SESSION['usermessage'] = "ERROR USER REG FAILED ";
     }
 }
