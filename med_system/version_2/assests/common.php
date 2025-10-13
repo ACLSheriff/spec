@@ -16,6 +16,7 @@ function new_user($conn, $post)//creates fuction
 
         $stmt->execute();// run the query to insert
         $conn = null;// gets rid of connection to make sure no open connection which is secrity breach
+        return true;
     }catch (PDOException $e){
         error_log(" Audit database error:" . $e->getMessage());
         throw new Exception( "Audit database error: " . $e);
@@ -114,17 +115,83 @@ function getnewuserid($conn, $username){//gets the id of the new user to be able
     return $result["user_id"];  //returns result
 }
 
-function password_check($conn, $pwd){
-    correctpwd = 0;
-    echo len_checker($_POST['pwd']);//these will call the fuction in common and check the pwd and output infomation based on
-    echo check_upper($_POST['pwd']);
-    echo check_lower($_POST['pwd']);
-    echo char_special($_POST['pwd']);
-    echo check_first_num($_POST['pwd']);
-    echo password_check($_POST['pwd']);
-    echo digit_check($_POST['pwd']);
-    echo check_first_special($_POST['pwd']);
-    echo last_special_char($_POST['pwd']);
+function password_streagth($pwd){
+
+    $checker = 0;
+    $results = array();
+
+
+    $tmp = len_checker($pwd);
+    $checker+=$tmp;
+    if ($tmp==1){
+        $results["len"] = "SUCCESS: Length Check Passed";
+    } else {
+        $results["len"] = "FAILED: Length Check FAILED";
+    }
+
+    $tmp = check_upper($pwd);
+    $checker+=$tmp;
+    if ($tmp==1){
+        $results["len"] = "SUCCESS: uppercase Check Passed";
+    } else {
+        $results["len"] = "FAILED: uppercase Check FAILED";
+    }
+
+    $tmp = check_lower($pwd);
+    $checker+=$tmp;
+    if ($tmp==1){
+        $results["len"] = "SUCCESS: lowercase Check Passed";
+    } else {
+        $results["len"] = "FAILED: lowercase Check FAILED";
+    }
+
+    $tmp = char_special($pwd);
+    $checker+=$tmp;
+    if ($tmp==1){
+        $results["len"] = "SUCCESS: special charecter Check Passed";
+    } else {
+        $results["len"] = "FAILED: special charecter Check FAILED";
+    }
+
+    $tmp = password_check($pwd);
+    $checker+=$tmp;
+    if ($tmp==1){
+        $results["len"] = "SUCCESS: password word Check Passed";
+    } else {
+        $results["len"] = "FAILED: password word Check FAILED";
+    }
+
+    $tmp = digit_check($pwd);
+    $checker+=$tmp;
+    if ($tmp==1){
+        $results["len"] = "SUCCESS: digit Check Passed";
+    } else {
+        $results["len"] = "FAILED: digit Check FAILED";
+    }
+
+    $tmp =  last_special_char($pwd);
+    $checker+=$tmp;
+    if ($tmp==1){
+        $results["len"] = "SUCCESS: last letter special charecter Check Passed";
+    } else {
+        $results["len"] = "FAILED: last letter special charecter Check FAILED";
+    }
+
+    $tmp = check_first_special($pwd);
+    $checker+=$tmp;
+    if ($tmp==1){
+        $results["len"] = "SUCCESS: first letter special charecter Check Passed";
+    } else {
+        $results["len"] = "FAILED: first letter special charecter Check FAILED";
+    }
+
+    if ($checker > 7) {
+        return true;
+    }else{
+        $_SESSION['usermessage'] = "your password has failed 1 or more complexity tests ";
+        return false;
+    }
+
 
 }
 
@@ -132,28 +199,19 @@ function password_check($conn, $pwd){
 function digit_check($pwd)//names the fuction and brings in input to work with
 {
     if (preg_match('/[0-9]/', $pwd)) {//this checks if these are any digits 0-9 in the input
-        return correctpwd = correctpwd + 1 ;//respose depding on the password input
+        return 1; //respose depding on the password input
     } else {
-        return " your password should contain numbers.";
+        return 0;
     }
 }
-
-function check_first_num($pwd) {//names the fuction and brings in input to work with
-    if (is_numeric($pwd[0])) {//this checks if the first charter of the input is a number
-        return "Your password should not start with a number.";//respose depding on the password input
-    } else {
-        return "Good, it doesn’t start with a number.";
-    }
-}
-
 
 
 function check_first_special($pwd)//names the fuction and brings in input to work with
 {
     if (preg_match( "/^[^a-zA-Z0-9_]/", $pwd) ) {//this will check if the first letter is a special charter
-        return " your password should not start with a special character ";//respose depding on the password input
+        return 0;//respose depding on the password input
     }else{
-        return " good, dont put a special character first ";
+        return 1;
     }
 
 }
@@ -163,9 +221,9 @@ function len_checker($pwd){//creates a function
     $length = strlen($pwd);// this gets the lngth of the string
 
     if ($length < 8 ){// checks if the length is 8 or more
-        return "password is too short it should be 8 characters or longer.";//respose depding on the password input
+        return 0;//respose depding on the password input
     } else {
-        return " good length of a password ";
+        return 1;
     }
 
 
@@ -174,18 +232,18 @@ function len_checker($pwd){//creates a function
 
 function check_lower($pwd){//names the fuction and brings in input to work with
     if (preg_match("/[a-z]/", $pwd)){//this checks to see if there r lowercase atters in the password
-        return " well done for including lower case ";//respose depding on the password input
+        return 1;//respose depding on the password input
     } else {
-        return "you need to include lower case letters";
+        return 0;
     }
 }
 
 
 function password_check($pwd){//names the fuction and brings in input to work with
     if (str_contains($pwd,"password")){// checks if the string password is in the input
-        return " the word 'Password' should not be used in your password ";//respose depding on the password input
+        return 0;//respose depding on the password input
     } else {
-        return " good, dont include password in your password ";
+        return 1;
     }
 
 }
@@ -194,9 +252,9 @@ function password_check($pwd){//names the fuction and brings in input to work wi
 function char_special($pwd)//names the fuction and brings in input to work with
 {
     if (preg_match("/[^a-zA-Z0-9_]/", $pwd)){// checks that the input inclueds a special charter
-        return " well done for including a special character";//respose depding on the password input
+        return 1;//respose depding on the password input
     } else {
-        return " your password should have a special character";
+        return 0;
     }
 }
 
@@ -204,9 +262,9 @@ function char_special($pwd)//names the fuction and brings in input to work with
 function check_upper($pwd){//names the fuction and brings in input to work with
 
     if(preg_match("/[A-Z]/", $pwd)){// checks to see if capital letters are included in the input
-        return " well done for including upper case";//respose depding on the password input
+        return 1;//respose depding on the password input
     }else{
-        return "password should contain uppercase letters.";
+        return 0;
     }
 
 }
@@ -214,8 +272,8 @@ function check_upper($pwd){//names the fuction and brings in input to work with
 
 function last_special_char($pwd) {//names the fuction and brings in input to work with
     if (preg_match('/[^a-zA-Z0-9_]$/', $pwd)) {// checks if the last letter of the input is a special charter
-        return "Your password should not end with a special character.";//respose depding on the password input
+        return 0;//respose depding on the password input
     } else {
-        return "Well done, it doesn’t end with a special character.";
+        return 1;
     }
 }

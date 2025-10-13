@@ -7,20 +7,20 @@ require_once("assests/common.php");//gets acess to common
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {//checking a super globle to see if the request methord is post to call the page
 
-    echo filter_var($_POST['username'], FILTER_SANITIZE_STRING);
-    echo filter_var($_POST['first_name'], FILTER_SANITIZE_STRING);
-    echo filter_var($_POST['surname'], FILTER_SANITIZE_STRING);
-    echo filter_var($_POST['password'], FILTER_SANITIZE_STRING);
-    echo filter_var($_POST['d_o_b'], FILTER_SANITIZE_STRING);
-    echo filter_var($_POST['adress'], FILTER_SANITIZE_STRING);
+    if (password_streagth($_POST['password'])) {
 
-    if (!username_check(dbconnect_insert(), $_POST["username"])) {//checks the value returned to see if username id avalible
 
-        if (new_user(dbconnect_insert(), $_POST)) ;
-        auditor(dbconnect_insert(),getnewuserid(dbconnect_insert(), $_POST["username"]),"reg", "new user registered");//this logs that a user has registerd and stores in database
-        $_SESSION['usermessage'] = "USER REG SUCCESSFUL";//gives and formats the resutle of the check from common username_check
+
+        if (!username_check(dbconnect_insert(), $_POST["username"])) {//checks the value returned to see if username id avalible
+            if (new_user(dbconnect_insert(), $_POST)) {
+                auditor(dbconnect_insert(), getnewuserid(dbconnect_insert(), $_POST["username"]), "reg", "new user registered");//this logs that a user has registerd and stores in database
+                $_SESSION['usermessage'] = "USER REG SUCCESSFUL";//gives and formats the resutle of the check from common username_check
+            } else {
+                $_SESSION['usermessage'] = "ERROR USER REG FAILED ";//if its not aviblibe it prints this error message
+            }
+        }
     } else {
-        $_SESSION['usermessage'] = "ERROR USER REG FAILED ";//if its not aviblibe it prints this error message
+        $_SESSION['usermessage'] = "ERROR USER REG FAILED ";
     }
 }
 
