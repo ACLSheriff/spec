@@ -7,19 +7,19 @@ require_once("assests/common.php");//gets acess to common
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {//checking a super globle to see if the request methord is post to call the page
 
-    $fusername = filter_var($_POST['username'], FILTER_SANITIZE_STRING);//filtered version of each veriable to make sure the program will not break and is secure
-    $ffirstname = filter_var($_POST['firstname'], FILTER_SANITIZE_STRING);// im doing this here and not in a subroutine becuse its difficult to do in a subroutine as it would be a lop and lots of diffrent veriables it might alsobe diffrent filters not just strinfg
-    $fsurname = filter_var($_POST['surname'], FILTER_SANITIZE_STRING);
-    $fpassword = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
-    $fadress = filter_var($_POST['adress'], FILTER_SANITIZE_STRING);
+    $_POST['username'] = filter_var($_POST['username'], FILTER_SANITIZE_EMAIL);
+    $_POST['first_name'] = filter_var($_POST['first_name'], FILTER_SANITIZE_STRING);
+    $_POST['surname'] = filter_var($_POST['surname'], FILTER_SANITIZE_STRING);
+    $_POST['password'] = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
+    $_POST['adress'] = filter_var($_POST['adress'], FILTER_SANITIZE_STRING);
 
 
-    if (password_streagth($fpassword)) {
 
+   if (password_streagth($_POST['password'])) {
 
-        if (!username_check(dbconnect_insert(), $fusername)) {//checks the value returned to see if username id avalible
+      if (!username_check(dbconnect_insert(), $_POST['username'])) {//checks the value returned to see if username id avalible
             if (new_user(dbconnect_insert(), $_POST)) {
-                auditor(dbconnect_insert(), getnewuserid(dbconnect_insert(), $fusername), "reg", "new user registered");//this logs that a user has registerd and stores in database
+               auditor(dbconnect_insert(), getnewuserid(dbconnect_insert(), $_POST['username']), "reg", "new user registered");//this logs that a user has registerd and stores in database
                 $_SESSION['usermessage'] = "USER REG SUCCESSFUL";//gives and formats the resutle of the check from common username_check
             } else {
                 $_SESSION['usermessage'] = "ERROR USER REG FAILED ";//if its not aviblibe it prints this error message

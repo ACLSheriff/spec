@@ -105,14 +105,23 @@ function auditor($conn, $userid, $code, $long)
 
 }
 
-function getnewuserid($conn, $username){//gets the id of the new user to be able to enter into audit
-    $sql = "SELECT user_id FROM users WHERE username= ?";
-    $stmt = $conn->prepare($sql); //prepares SQL
-    $stmt->bindValue(1, $username);   //binds paramiters for security
-    $stmt->execute(); //run quary to insert
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);  //brings array back from database
-    $conn = null; //closes connection
-    return $result["user_id"];  //returns result
+function getnewuserid($conn, $username)
+{//gets the id of the new user to be able to enter into audit
+    try {
+        $sql = "SELECT user_id FROM users WHERE username= ?";
+        $stmt = $conn->prepare($sql); //prepares SQL
+        $stmt->bindValue(1, $username);   //binds paramiters for security
+        $stmt->execute(); //run quary to insert
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);  //brings array back from database
+        $conn = null; //closes connection
+        return $result["user_id"];  //returns result
+    } catch (PDOException $e) {
+        error_log(" Audit  error:" . $e->getMessage());//logs error
+        throw  $e;//throw the exception
+    }catch (Exception $e) {//catching errors to make robust and giving error messages
+        error_log(" Audit  error:" . $e->getMessage());//logs error
+        throw  $e;//throw the exception
+    }
 }
 
 function password_streagth($pwd){
