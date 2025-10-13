@@ -13,12 +13,12 @@ if (isset($_SESSION['user'])) {
 
 elseif ($_SERVER["REQUEST_METHOD"] === "POST") {//verifys the function
 
-    $fusername = filter_var($_POST['username'], FILTER_SANITIZE_STRING);//fitered veriable to make sure its not going to cause an error and that its secure
-    $fpassword = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
+    $_POST['username'] = filter_var($_POST['username'], FILTER_SANITIZE_EMAIL);
+    $_POST['password'] = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
 
     $usr = login(dbconnect_insert(),$_POST);//calls login fuction
 
-    if($usr && password_verify($fpassword,$fusername)){// checking the username and password match and is present
+    if($usr && password_verify($_POST['password'],$_POST['username'])){// checking the username and password match and is present
         $_SESSION["user"] = true;//sets up the session veriable
         $_SESSION['user_id'] = $usr["user_id"];//sets and store user id
         $_SESSION['usermessage'] = "SUCCESSFULLY LOGGED IN";//success message
@@ -56,7 +56,7 @@ echo "<p> welcome back </p>";//paragh of text to instruct
 echo "<br>";// breaks for readability
 echo "<form method='post' action=''>"; //this creates the form
 
-echo "<input type='text' name='username' placeholder='username' </input>";//allows intput into form
+echo "<input type='text' name='username' placeholder='email' </input>";//allows intput into form
 echo "<br>";
 echo "<input type='text' name='password' placeholder='password' </input>";
 echo "<br>";

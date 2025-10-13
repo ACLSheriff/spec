@@ -2,8 +2,8 @@
 
 session_start();
 
-require_once "assests/dbconnect.php";
-require_once "assests/common.php";
+require_once__DIR__ . "assests/dbconnect.php";
+require_once__DIR__ . "assests/common.php";
 
 if (isset($_SESSION['user'])) {
     $_SESSION['usermessage'] = "you are already logged in";///checks if user is already logged in and will return message if so

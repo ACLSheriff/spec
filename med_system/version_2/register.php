@@ -14,7 +14,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {//checking a super globle to see if t
     $_POST['adress'] = filter_var($_POST['adress'], FILTER_SANITIZE_STRING);
 
 
-
    if (password_streagth($_POST['password'])) {
 
       if (!username_check(dbconnect_insert(), $_POST['username'])) {//checks the value returned to see if username id avalible
@@ -54,7 +53,7 @@ echo "<p> welcome we are so glad your joining us, please fill in the form below 
 echo "<br>";// breaks for readability
 echo "<form method='post' action=''>"; //this creates the form
 
-echo "<input type='text' name='username' placeholder='username' </input>";
+echo "<input type='text' name='username' placeholder='email' </input>";
 echo "<br>";
 echo "<input type='text' name='first_name' placeholder='first_name' </input>";//allows intput into form
 echo "<br>";
