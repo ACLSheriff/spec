@@ -105,6 +105,23 @@ function auditor($conn, $userid, $code, $long)
 
 }
 
+function staff_getter($conn){
+
+    $sql = "SELECT staff_id, role, surname, room FROM staff WHERE role != ? ORDER BY role DESC";
+
+    $stmt = $conn->prepare($sql);
+    $exclude_role = "adm";
+
+    $stmt->execute(1,$exclude_role);
+
+    $stmt->execute(); //run the query to insert
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $conn = null;  // close the connection so cant be abused
+    return true;  // registration successful
+
+}
+
+
 function getnewuserid($conn, $username)
 {//gets the id of the new user to be able to enter into audit
     try {
