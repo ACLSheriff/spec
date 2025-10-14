@@ -14,8 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {//checking a super globle to see if t
     $_POST['adress'] = filter_var($_POST['adress'], FILTER_SANITIZE_STRING);
 
 
-
-   if (password_streagth($_POST['password'])) {
+   if (password_streagth($_POST['password'])) {//checks the password has met all requrements
 
       if (!username_check(dbconnect_insert(), $_POST['username'])) {//checks the value returned to see if username id avalible
             if (new_user(dbconnect_insert(), $_POST)) {
@@ -25,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {//checking a super globle to see if t
                 $_SESSION['usermessage'] = "ERROR USER REG FAILED ";//if its not aviblibe it prints this error message
             }
         }
-    } else {
+    } else {// handles if password has not met all requiremts
         $_SESSION['usermessage'] = "ERROR USER REG FAILED ";
     }
 }
@@ -54,7 +53,7 @@ echo "<p> welcome we are so glad your joining us, please fill in the form below 
 echo "<br>";// breaks for readability
 echo "<form method='post' action=''>"; //this creates the form
 
-echo "<input type='text' name='username' placeholder='username' </input>";
+echo "<input type='text' name='username' placeholder='email' </input>";
 echo "<br>";
 echo "<input type='text' name='first_name' placeholder='first_name' </input>";//allows intput into form
 echo "<br>";
