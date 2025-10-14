@@ -64,13 +64,13 @@ function username_check($conn, $username)
 
 
 
-function auditor($conn, $staffid, $code, $long)
+function auditor($conn, $staff_id, $code, $long)
 {
     $sql = "INSERT INTO staff_audit (date,staff_id,code,longdesc) VALUES(?,?,?,?)";//is an SQL quary that will insert the data into each coloum of the table
     $stmt = $conn->prepare($sql);  //prepare the SQL
     $date = date("Y-m-d"); //this is the the structer a my sQl feild works and accespts
     $stmt->bindValue(1, $date);  //bind paramiters for security
-    $stmt->bindValue(2, $staffid);
+    $stmt->bindValue(2, $staff_id);
     $stmt->bindValue(3, $code);
     $stmt->bindValue(4, $long);
 
