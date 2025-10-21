@@ -5,7 +5,14 @@ session_start();
 require_once "assests/dbconnect.php";
 require_once "assests/common.php";
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+if (!isset($_SESSION['userid'])) {
+    $_SESSION['usermessage'] = "you are not logged in";///checks if user is already logged in and will return message if so
+    header("location:index.php");//returns to home page
+    exit;//stop further exicution
+}
+
+elseif($_SERVER["REQUEST_METHOD"] == "POST"){
 //this should be here so if there is a use of headers it can be done so the rest of teh code dosnt load so teh headers will work and change page without errors becuse the header has loaded
 
     try {
@@ -71,7 +78,11 @@ foreach ($staff as $staf){
     }
     echo "<option value='".$staf["staff_id"]."'>".$role. " ".$staf["surname"]. " Room ".$staf["room"]."</option>";
 }
-echo "</selected>";
+echo "</select>";
+
+echo "<br>";
+
+echo "<input type='submit' name='submit' value='Book Appointment'>";
 
 echo "</form>";//end form
 

@@ -142,7 +142,7 @@ function getnewuserid($conn, $username)
 }
 
 function commit_booking($conn, $epoch){
-    $sql = "INSERT INTO bookings (userid, staffid, aptdatetime, bookedon) VALUES(?,?,?,?)";
+    $sql = "INSERT INTO bookings (user_id, staff_id, aptdate, bookedon) VALUES(?,?,?,?)";
     $stmt = $conn->prepare($sql);
     $stmt->bindValue(1, $_SESSION['userid']);
     $stmt->bindValue(2, $_POST['staff']);
