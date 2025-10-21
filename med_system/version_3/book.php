@@ -6,12 +6,24 @@ require_once "assests/dbconnect.php";
 require_once "assests/common.php";
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
+//this should be here so if there is a use of headers it can be done so the rest of teh code dosnt load so teh headers will work and change page without errors becuse the header has loaded
 
-    $tmp = $_POST["appt_date"].' '.$_POST["appt_time"];//cobines it into a single string with a sigle dat and time
-    $epoch_time = strtotime($tmp);//converting to epoc time this passing of the veribale is best practice and minimises issues
+    try {
+        $tmp = $_POST["appt_date"] . ' ' . $_POST["appt_time"];//cobines it into a single string with a sigle dat and time
+        $epoch_time = strtotime($tmp);//converting to epoc time this passing of the veribale is best practice and minimises issues
+        if(commit_booking(dbconnect_insert(), $epoch_time)){
+            $_SESSION["usermessage"] = "SUCCESS: your booking has been confirmed";
+            header("Location: booking.php");
+            exit;
+        }else{
+            $_SESSION["usermessage"] = "ERROR: something went wrong";
+        }
 
-    echo $epoch_time;//echos out the date and time
-    echo time();
+    } catch (PDOException $e) {
+        $_SESSION["usermessage"] = "Error: " . $e->getMessage();
+    } catch(Exception $e) {
+        $_SESSION["usermessage"] = "Error: " . $e->getMessage();
+    }
 }
 
 echo "<!DOCTYPE html>";//required tag
@@ -57,8 +69,7 @@ foreach ($staff as $staf){
     }else if ($staf["role"] == "nur"){
         $role = "nurse";
     }
-    echo "<option value='".$staf["staff_id"].">".$role. " ".$staf["surname"].
-       " Room ".$staf["room"]."</option>";
+    echo "<option value='".$staf["staff_id"]."'>".$role. " ".$staf["surname"]. " Room ".$staf["room"]."</option>";
 }
 echo "</selected>";
 

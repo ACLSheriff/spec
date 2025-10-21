@@ -107,17 +107,17 @@ function auditor($conn, $userid, $code, $long)
 
 function staff_getter($conn){
 
-    $sql = "SELECT staff_id, role, surname, room FROM staff WHERE role != ? ORDER BY role DESC";
+    $sql = "SELECT staff_id, role, surname, room FROM doctors WHERE role != ? ORDER BY role DESC";
 
     $stmt = $conn->prepare($sql);
     $exclude_role = "adm";
 
-    $stmt->execute(1,$exclude_role);
+    $stmt->bindValue(1,$exclude_role);
 
     $stmt->execute(); //run the query to insert
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $conn = null;  // close the connection so cant be abused
-    return true;  // registration successful
+    return $result;  // registration successful
 
 }
 
@@ -140,6 +140,20 @@ function getnewuserid($conn, $username)
         throw  $e;//throw the exception
     }
 }
+
+function commit_booking($conn, $epoch){
+    $sql = "INSERT INTO bookings (userid, staffid, aptdatetime, bookedon) VALUES(?,?,?,?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(1, $_SESSION['userid']);
+    $stmt->bindValue(2, $_POST['staff']);
+    $stmt->bindValue(3, $epoch);
+    $stmt->bindValue(4, time());
+
+    $stmt->execute();
+    $conn = null;
+    return true;
+}
+
 
 function password_streagth($pwd){
 
