@@ -5,7 +5,14 @@ session_start();
 require_once "assests/dbconnect.php";
 require_once "assests/common.php";
 
+if($_SERVER["REQUEST_METHOD"] == "POST"){
 
+    $tmp = $_POST["appt_date"].' '.$_POST["appt_time"];//cobines it into a single string with a sigle dat and time
+    $epoch_time = strtotime($tmp);//converting to epoc time this passing of the veribale is best practice and minimises issues
+
+    echo $epoch_time;//echos out the date and time
+    echo time();
+}
 
 echo "<!DOCTYPE html>";//required tag
 echo "<html>";//opens page content
@@ -24,7 +31,7 @@ require_once "assests/navbar.php";// gets and displays nav bar
 
 echo "<div class='content'>";// this class is a box that i can put content for my page into
 
-echo "<h2> Bookings </h2>";//heading
+echo "<h2> Book appiments </h2>";//heading
 echo "<p>  </p>";//paragh of text to instruct
 
 
@@ -33,9 +40,17 @@ echo "<form method='post' action=''>"; //this creates the form
 
 $staff = staff_getter(dbconnect_insert());
 
-echo "<input type='date' name='date' value='".date("Y-m-d")."'>";
 
-echo "<input type='type' name='appt_time' step='600'>";
+echo "<layble for='appt_time'> Appointment time:</lable>";
+echo "<input type='time' name='appt_time' required>";
+echo "<br>";
+
+
+echo "<layble for='appt_date'> Appointment date:</lable>";
+echo "<input type='date' name='appt_date' required>";
+echo "<br>";
+echo "<select name='staff'>";
+
 foreach ($staff as $staf){
     if($staf["role"] == "doc"){
         $role = "doctor";

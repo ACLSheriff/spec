@@ -18,7 +18,7 @@ elseif ($_SERVER["REQUEST_METHOD"] === "POST") {//verifys the function
 
     $usr = login(dbconnect_insert(),$_POST);//calls login fuction
 
-    if($usr && password_verify($fpassword,$fusername)){// checking the username and password match and is present
+    if($usr && password_verify($fpassword,$usr['password'])){// checking the username and password match and is present
         $_SESSION["user"] = true;//sets up the session veriable
         $_SESSION['user_id'] = $usr["user_id"];//sets and store user id
         $_SESSION['usermessage'] = "SUCCESSFULLY LOGGED IN";//success message
