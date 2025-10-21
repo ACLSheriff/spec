@@ -14,19 +14,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {//checking a super globle to see if t
     $_POST['adress'] = filter_var($_POST['adress'], FILTER_SANITIZE_STRING);
 
 
+    try {
+        if (password_streagth($_POST['password'])) {
 
-   if (password_streagth($_POST['password'])) {
-
-      if (!username_check(dbconnect_insert(), $_POST['username'])) {//checks the value returned to see if username id avalible
-            if (new_user(dbconnect_insert(), $_POST)) {
-               auditor(dbconnect_insert(), getnewuserid(dbconnect_insert(), $_POST['username']), "reg", "new user registered");//this logs that a user has registerd and stores in database
-                $_SESSION['usermessage'] = "USER REG SUCCESSFUL";//gives and formats the resutle of the check from common username_check
-            } else {
-                $_SESSION['usermessage'] = "ERROR USER REG FAILED ";//if its not aviblibe it prints this error message
+            if (!username_check(dbconnect_insert(), $_POST['username'])) {//checks the value returned to see if username id avalible
+                if (new_user(dbconnect_insert(), $_POST)) {
+                    auditor(dbconnect_insert(), getnewuserid(dbconnect_insert(), $_POST['username']), "reg", "new user registered");//this logs that a user has registerd and stores in database
+                    $_SESSION['usermessage'] = "USER REG SUCCESSFUL";//gives and formats the resutle of the check from common username_check
+                } else {
+                    $_SESSION['usermessage'] = "ERROR USER REG FAILED ";//if its not aviblibe it prints this error message
+                }
             }
+        } else {
+            $_SESSION['usermessage'] = "ERROR USER REG FAILED ";
         }
-    } else {
-        $_SESSION['usermessage'] = "ERROR USER REG FAILED ";
+    } catch (PDOException $e) {
+        $_SESSION['usermessage'] = "ERROR USER REG FAILED ". $e->getMessage();
+    }
+
+    catch (Exception $e) {
+        $_SESSION['usermessage'] = "ERROR USER REG FAILED ". $e->getMessage();
     }
 }
 

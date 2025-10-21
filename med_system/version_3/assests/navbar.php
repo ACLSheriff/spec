@@ -8,7 +8,7 @@ echo "<ul>";  // opens the list
 
 echo "<li> <a href='index.php'> Home </a> </li>";//links of each page that can be displayed to click through
 
-if(!isset($_SESSION['user'])) {
+if(!isset($_SESSION['userid'])) {
     echo "<li> <a href='login.php'> Login </a> </li>";
     echo "<li> <a href='register.php'> User register </a> </li>";
 }else {
