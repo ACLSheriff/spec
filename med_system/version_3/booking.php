@@ -10,10 +10,21 @@ if (!isset($_SESSION['userid'])) {
     $_SESSION['usermessage'] = "you are not logged in";///checks if user is already logged in and will return message if so
     header("location:index.php");//returns to home page
     exit;//stop further exicution
-}
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+} elseif($_SERVER["REQUEST_METHOD"] == "POST"){
 //this should be here so if there is a use of headers it can be done so the rest of teh code dosnt load so teh headers will work and change page without errors becuse the header has loaded
-
+    if(isset($_POST['appdelete'])){
+        try{
+            if(cancel_appt(dbconnect_insert(), $_POST['appid'])){
+                $_SESSION['message'] = "appointment has been cancelled.";
+            }else {
+                $_SESSION['message'] = "appointment could not be cancelled.";
+            }
+            } catch(PDOException $e){
+                $_SESSION['message'] = "ERROR: ".$e->getMessage();
+            }catch(Exception $e){
+                $_SESSION['message'] = "ERROR: ".$e->getMessage();
+            }
+        }
 }
 
 echo "<!DOCTYPE html>";//required tag
@@ -53,12 +64,19 @@ if(!$appts){
             $role = "nurse";
         }
 
+        echo "<form action='' method='post'>";// creating a form per row of the table for each appinment
+
         echo "<tr>";
         echo "<td> Date:" . date('M d, Y @ h:i A', $appt['aptdate']) . "</td>";//using a built in fuction and telling it what format our epoch time should go in for when the apt is
         echo "<td> Made on: " . date('M d, Y @ h:i A', $appt['bookedon']) . "</td>";//using a built in fuction and telling it what format our epoch time should go in for when the apt was made
         echo "<td> with: " . $role . " " . $appt['surname'] . "</td>";
         echo "<td> in:" . $appt['room'] . "</td>";
+        echo "<td><input type='hidden' name='appid' value=".$appt['booking_id'].">
+        <input type='submit' name='appdelete' value='cancel appt' />
+        <input type='submit' name='appchange' value='change appt'/></td>";//set the value without needed to input
+
         echo "</tr>";
+        echo "</form>";
     }
 }
 

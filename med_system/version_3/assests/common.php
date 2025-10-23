@@ -175,6 +175,20 @@ function appt_getter($conn)
 }
 
 
+function cancel_appt($conn, $aptid)
+{
+    $sql = "DELETE FROM bookings WHERE booking_id = ?";//this deltes the booking the user selected from the database
+    $stmt = $conn->prepare($sql);//prepares SQL statment
+
+    $stmt->bindValue(1,$aptid);// finds the user id and binds to value
+
+    $stmt->execute(); //run the query to insert
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);//
+    $conn = null;  // close the connection so cant be abused
+    return true;
+
+}
+
 function password_streagth($pwd){
 
     $checker = 0;
