@@ -154,6 +154,67 @@ function commit_booking($conn, $epoch){
     return true;
 }
 
+function appt_getter($conn)
+{
+    $sql = "SELECT b.booking_id, b.aptdate, b.bookedon, s.role, s.surname, s.room FROM bookings b JOIN doctors s ON b.staff_id = s.staff_id WHERE b.user_id = ? ORDER BY b.aptdate ASC";
+// selects the feils from the diffrent tables, it gets them from the bookings table which we have labled b and joins the docters table with have labled s
+    // and use staff id to link together from each table, where it has the user id that that is being used and this will be pulled and orderd by the appiment date in asending order
+    $stmt = $conn->prepare($sql);
+
+    $stmt->bindValue(1,$_SESSION['userid']);
+
+    $stmt->execute(); //run the query to insert
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $conn = null;  // close the connection so cant be abused
+    if($result){
+        return $result;
+    } else{
+        return false;
+    }
+
+}
+
+
+function cancel_appt($conn, $aptid)
+{
+    $sql = "DELETE FROM bookings WHERE booking_id = ?";//this deltes the booking the user selected from the database
+    $stmt = $conn->prepare($sql);//prepares SQL statment
+
+    $stmt->bindValue(1,$aptid);// finds the user id and binds to value
+
+    $stmt->execute(); //run the query to insert
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);//
+    $conn = null;  // close the connection so cant be abused
+    return true;
+
+}
+
+
+function fetch_appt($conn, $booking_id)
+{
+    $sql = "SELECT * FROM bookings WHERE booking_id = ?";//gets the bookings infomation
+    $stmt = $conn->prepare($sql);//prepares SQL statment
+
+    $stmt->bindValue(1, $booking_id);// finds the user id and binds to value
+
+    $stmt->execute(); //run the query to insert
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);//
+    $conn = null;  // close the connection so cant be abused
+    return $result;//returns the booking info result
+}
+
+function appt_update($conn, $booking_id, $apt_time)
+{
+    $sql = "UPDATE bookings SET staff_id = ?, aptdate = ? WHERE booking_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $_POST['staff']);
+    $stmt->bindParam(2, $booking_id);
+    $stmt->bindParam(3, $apt_time);
+    $stmt->execute();
+    $conn = null;
+    return true;
+
+}
 
 function password_streagth($pwd){
 
