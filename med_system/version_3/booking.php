@@ -8,6 +8,7 @@ require_once "assests/common.php";
 
 if (!isset($_SESSION['userid'])) {
     $_SESSION['usermessage'] = "you are not logged in";///checks if user is already logged in and will return message if so
+    unset($_SESSION['appid']);
     header("location:index.php");//returns to home page
     exit;//stop further exicution
 } elseif($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -24,7 +25,11 @@ if (!isset($_SESSION['userid'])) {
             }catch(Exception $e){
                 $_SESSION['message'] = "ERROR: ".$e->getMessage();
             }
-        }
+        }elseif(isset($_POST['appchange'])){
+        $_SESSION['apptid'] = $_POST['appid'];
+        header("location:change_booking.php");
+        exit;
+    }
 }
 
 echo "<!DOCTYPE html>";//required tag

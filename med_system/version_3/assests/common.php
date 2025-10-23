@@ -189,6 +189,33 @@ function cancel_appt($conn, $aptid)
 
 }
 
+
+function fetch_appt($conn, $booking_id)
+{
+    $sql = "SELECT * FROM bookings WHERE booking_id = ?";//gets the bookings infomation
+    $stmt = $conn->prepare($sql);//prepares SQL statment
+
+    $stmt->bindValue(1, $booking_id);// finds the user id and binds to value
+
+    $stmt->execute(); //run the query to insert
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);//
+    $conn = null;  // close the connection so cant be abused
+    return $result;//returns the booking info result
+}
+
+function appt_update($conn, $booking_id, $apt_time)
+{
+    $sql = "UPDATE bookings SET staff_id = ?, aptdate = ? WHERE booking_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $_POST['staff']);
+    $stmt->bindParam(2, $booking_id);
+    $stmt->bindParam(3, $apt_time);
+    $stmt->execute();
+    $conn = null;
+    return true;
+
+}
+
 function password_streagth($pwd){
 
     $checker = 0;
