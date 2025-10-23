@@ -154,6 +154,26 @@ function commit_booking($conn, $epoch){
     return true;
 }
 
+function appt_getter($conn)
+{
+    $sql = "SELECT b.booking_id, b.aptdate, b.bookedon, s.role, s.surname, s.room FROM bookings b JOIN doctors s ON b.staff_id = s.staff_id WHERE b.user_id = ? ORDER BY b.aptdate ASC";
+// selects the feils from the diffrent tables, it gets them from the bookings table which we have labled b and joins the docters table with have labled s
+    // and use staff id to link together from each table, where it has the user id that that is being used and this will be pulled and orderd by the appiment date in asending order
+    $stmt = $conn->prepare($sql);
+
+    $stmt->bindValue(1,$_SESSION['userid']);
+
+    $stmt->execute(); //run the query to insert
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $conn = null;  // close the connection so cant be abused
+    if($result){
+        return $result;
+    } else{
+        return false;
+    }
+
+}
+
 
 function password_streagth($pwd){
 
