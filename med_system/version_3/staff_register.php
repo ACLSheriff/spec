@@ -61,6 +61,15 @@ echo "<input type='submit' name='submit' value='submit' />";//submit button for 
 
 echo "</form>";//end form
 
+echo "<br>";
+
+try{//error handle
+    $conn = dbconnect_insert();
+    echo "succsess";//if it works prints succsess message
+} catch (PDOException $e) {//catches any other error
+    echo $e->getMessage();
+}
+
 
 echo "<br>";
 echo user_message();//calls the function

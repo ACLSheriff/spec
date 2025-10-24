@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="LaravelPint">
+    <laravel_pint_settings>
+      <laravel_pint_by_interpreter asDefaultInterpreter="true" interpreter_id="c0f4783c-d0b3-4bc5-8d66-e69019783133">
+        <option name="timeout" value="30000" />
+      </laravel_pint_by_interpreter>
+    </laravel_pint_settings>
+  </component>
   <component name="MessDetector">
     <phpmd_settings>
       <phpmd_by_interpreter asDefaultInterpreter="true" interpreter_id="c0f4783c-d0b3-4bc5-8d66-e69019783133" timeout="30000" />
@@ -20,8 +27,18 @@
       <phpcs_by_interpreter asDefaultInterpreter="true" interpreter_id="c0f4783c-d0b3-4bc5-8d66-e69019783133" timeout="30000" />
     </phpcs_settings>
   </component>
+  <component name="PhpStan">
+    <PhpStan_settings>
+      <phpstan_by_interpreter asDefaultInterpreter="true" interpreter_id="c0f4783c-d0b3-4bc5-8d66-e69019783133" timeout="60000" />
+    </PhpStan_settings>
+  </component>
   <component name="PhpStanOptionsConfiguration">
     <option name="transferred" value="true" />
+  </component>
+  <component name="Psalm">
+    <Psalm_settings>
+      <psalm_fixer_by_interpreter asDefaultInterpreter="true" interpreter_id="c0f4783c-d0b3-4bc5-8d66-e69019783133" timeout="60000" />
+    </Psalm_settings>
   </component>
   <component name="PsalmOptionsConfiguration">
     <option name="transferred" value="true" />

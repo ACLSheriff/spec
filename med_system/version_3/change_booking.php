@@ -63,7 +63,7 @@ echo "<form method='post' action=''>"; //this creates the form
 
 $staff = staff_getter(dbconnect_insert());
 
-$apt_time = date('H:i:s', $appt['aptdate']);
+$apt_time = date('H:i', $appt['aptdate']);
 $apt_date = date('Y-m-d', $appt['aptdate']);
 
 echo "<layble for='appt_time'> Appointment time:</lable>";
