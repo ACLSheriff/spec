@@ -15,6 +15,7 @@ if(!isset($_SESSION['userid'])) {
     echo "<li> <a href='logout.php'> Logout </a></li>";
     echo "<li> <a href='booking.php'> Bookings </a> </li>";
     echo "<li> <a href='book.php'> Book </a> </li>";
+    echo "<li> <a href='profile.php'> Profile </a> </li>";
 }
 
 echo "</ul>";  // closes the row of the list.

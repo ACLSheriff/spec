@@ -20,6 +20,7 @@ elseif($_SERVER["REQUEST_METHOD"] == "POST"){
         $epoch_time = strtotime($tmp);//converting to epoc time this passing of the veribale is best practice and minimises issues
         if(commit_booking(dbconnect_insert(), $epoch_time)){
             $_SESSION["usermessage"] = "SUCCESS: your booking has been confirmed";
+            auditor(dbconnect_insert(),$_SESSION['userid'],"log", "user has booked an appointment". $_SESSION['userid']);
             header("Location: booking.php");
             exit;
         }else{

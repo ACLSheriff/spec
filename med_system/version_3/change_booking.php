@@ -19,8 +19,9 @@ elseif($_SERVER["REQUEST_METHOD"] == "POST"){
     try {
         $tmp = $_POST["appt_date"] . ' ' . $_POST["appt_time"];//cobines it into a single string with a sigle dat and time
         $epoch_time = strtotime($tmp);//converting to epoc time this passing of the veribale is best practice and minimises issues
-        if(commit_booking(dbconnect_insert(),$_SESSION['apptid'], $epoch_time)){
+        if(appt_update(dbconnect_insert(),$_SESSION['apptid'], $epoch_time)){
             $_SESSION["usermessage"] = "SUCCESS: your booking has been confirmed";
+            auditor(dbconnect_insert(),$_SESSION['userid'],"log", "user has changed an appointment". $_SESSION['userid']);
             header("Location: booking.php");
             exit;
         }else{
@@ -53,8 +54,7 @@ require_once "assests/navbar.php";// gets and displays nav bar
 
 echo "<div class='content'>";// this class is a box that i can put content for my page into
 
-echo "<h2> Book appiments </h2>";//heading
-echo "<p>  </p>";//paragh of text to instruct
+echo "<h2> Change booking </h2>";//heading
 
 $appt = fetch_appt(dbconnect_insert(), $_SESSION["apptid"]);
 

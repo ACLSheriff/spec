@@ -195,7 +195,7 @@ function fetch_appt($conn, $booking_id)
     $sql = "SELECT * FROM bookings WHERE booking_id = ?";//gets the bookings infomation
     $stmt = $conn->prepare($sql);//prepares SQL statment
 
-    $stmt->bindValue(1, $booking_id);// finds the user id and binds to value
+    $stmt->bindValue(1, $booking_id);// finds the booking id and binds to value
 
     $stmt->execute(); //run the query to insert
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);//
@@ -210,6 +210,44 @@ function appt_update($conn, $booking_id, $apt_time)
     $stmt->bindParam(1, $_POST['staff']);
     $stmt->bindParam(2, $booking_id);
     $stmt->bindParam(3, $apt_time);
+    $stmt->execute();
+    $conn = null;
+    return true;
+
+}
+
+
+function profile_featch($conn, $user_id)
+{
+    $sql = "SELECT * FROM users WHERE user_id = ?";//gets the bookings infomation
+    $stmt = $conn->prepare($sql);//prepares SQL statment
+
+    $stmt->bindValue(1, $user_id);// finds the user id and binds to value
+    $stmt->bindValue(1, first_name);
+    $stmt->bindValue(2, surname);
+    $stmt->bindValue(3, username);
+    $hpswd = password_hash(password, PASSWORD_DEFAULT);//built in libray to incrypt
+    $stmt->bindValue(4, $hpswd);
+    $stmt->bindValue(5, d_o_b);
+    $stmt->bindValue(6, adress);// binding the d
+    $stmt->execute(); //run the query to insert
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);//
+    $conn = null;  // close the connection so cant be abused
+    return $result;//returns the booking info result
+}
+
+
+function profile_update($conn, $post)
+{
+    $sql = "UPDATE users SET first_name = ?, surname = ? , username = ? ,password = ? , d_o_b = ? , adress = ? WHERE user_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(1, first_name);
+    $stmt->bindValue(2, surname);
+    $stmt->bindValue(3, username);
+    $hpswd = password_hash(password, PASSWORD_DEFAULT);//built in libray to incrypt
+    $stmt->bindValue(4, $hpswd);
+    $stmt->bindValue(5, d_o_b);
+    $stmt->bindValue(6, adress);// binding the data from form to SQL statment this makes it more secure from a SQL injection attack less likly to hijk
     $stmt->execute();
     $conn = null;
     return true;

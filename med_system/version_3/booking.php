@@ -17,6 +17,7 @@ if (!isset($_SESSION['userid'])) {
         try{
             if(cancel_appt(dbconnect_insert(), $_POST['appid'])){
                 $_SESSION['message'] = "appointment has been cancelled.";
+                auditor(dbconnect_insert(),$_SESSION['userid'],"log", "user has cancelled an appointment". $_SESSION['userid']);
             }else {
                 $_SESSION['message'] = "appointment could not be cancelled.";
             }
