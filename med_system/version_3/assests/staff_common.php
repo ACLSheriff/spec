@@ -98,3 +98,29 @@ function getnewuserid($conn, $username)
         throw  $e;//throw the exception
     }
 }
+
+
+function login($conn, $post)
+{
+    try {// try this code
+        $conn = dbconnect_insert();//gets database
+        $sql = "SELECT * FROM doctors WHERE username= ?";//set up sql statments
+        $stmt = $conn->prepare($sql);//prepares sql quary
+        $stmt->bindValue(1, $post['username']);//binds paramiter to execute
+        $stmt->execute();//run from sql code
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);//brings back resuts
+        $conn = null;//stops connection
+
+        if ($result) {//if there is a result returned
+            return $result;//returns result
+        } else {
+            $_SESSION['usermessage'] = "User not found";//send message from error to be printed
+            header("Location: login.php");//send back to login page
+            exit();//exits code
+        }
+    } catch (PDOException $e) {
+        $_SESSION['usermessage'] = "User login".$e->getMessage();//returns error mesage to output
+        header("Location: login.php");//send back to long in page
+        exit();//exits code
+    }
+}

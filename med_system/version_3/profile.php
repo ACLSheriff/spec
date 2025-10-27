@@ -77,7 +77,7 @@ echo "<input type='text' name='password' placeholder='password' </input>";
 echo "<br>";
 echo "<input type='text' name='room' placeholder='room' <input/>";
 echo "<br>";
-echo "<input type='submit' name='submit' value='update datails' />";//submit button for form
+echo "<input type='submit' name='submit' value='update details' />";//submit button for form
 
 echo "</form>";//end form
 

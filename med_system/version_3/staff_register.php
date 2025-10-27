@@ -37,6 +37,7 @@ echo "<body>";//opens the body of the page
 echo "<div class='container'>";//dive alows you to split your page up and class allows you to style that div
 
 require_once "assests/topbar.php";// gets and displays the top bar
+require_once "assests/staff_nav.php";
 
 echo "<div class='content'>";// this class is a box that i can put content for my page into
 
