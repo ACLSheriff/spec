@@ -5,7 +5,7 @@ session_start();
 require_once "assests/dbconnect.php";
 require_once "assests/common.php";
 
-if (isset($_SESSION['userid'])) {
+if (isset($_SESSION['userid'])) {//checks if the user id is not set already if it is they are already logged in
     $_SESSION['usermessage'] = "you are already logged in";///checks if user is already logged in and will return message if so
     header("location:index.php");//returns to home page
     exit;//stop further exicution

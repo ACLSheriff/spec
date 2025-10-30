@@ -6,7 +6,7 @@ require_once "assests/dbconnect.php";
 require_once "assests/common.php";
 
 
-if (!isset($_SESSION['userid'])) {
+if (!isset($_SESSION['userid'])) {//if the user id is not set
     $_SESSION['usermessage'] = "you are not logged in";///checks if user is already logged in and will return message if so
     header("location:index.php");//returns to home page
     exit;//stop further exicution
@@ -18,17 +18,17 @@ elseif($_SERVER["REQUEST_METHOD"] == "POST"){
     try {
         $tmp = $_POST["appt_date"] . ' ' . $_POST["appt_time"];//cobines it into a single string with a sigle dat and time
         $epoch_time = strtotime($tmp);//converting to epoc time this passing of the veribale is best practice and minimises issues
-        if(commit_booking(dbconnect_insert(), $epoch_time)){
-            $_SESSION["usermessage"] = "SUCCESS: your booking has been confirmed";
-            auditor(dbconnect_insert(),$_SESSION['userid'],"log", "user has booked an appointment". $_SESSION['userid']);
-            header("Location: booking.php");
+        if(commit_booking(dbconnect_insert(), $epoch_time)){//trys to commit the booking
+            $_SESSION["usermessage"] = "SUCCESS: your booking has been confirmed";// will send user a message confirming
+            auditor(dbconnect_insert(),$_SESSION['userid'],"log", "user has booked an appointment". $_SESSION['userid']);//audits that the user has done in the system
+            header("Location: booking.php");//sends user to see there bookings
             exit;
         }else{
-            $_SESSION["usermessage"] = "ERROR: something went wrong";
+            $_SESSION["usermessage"] = "ERROR: something went wrong";//error message if the booking cant commit
         }
 
     } catch (PDOException $e) {
-        $_SESSION["usermessage"] = "Error: " . $e->getMessage();
+        $_SESSION["usermessage"] = "Error: " . $e->getMessage();//catches any other errors that happen in the prosses
     } catch(Exception $e) {
         $_SESSION["usermessage"] = "Error: " . $e->getMessage();
     }
@@ -58,37 +58,37 @@ echo "<p>  </p>";//paragh of text to instruct
 echo "<br>";// breaks for readability
 echo "<form method='post' action=''>"; //this creates the form
 
-$staff = staff_getter(dbconnect_insert());
+$staff = staff_getter(dbconnect_insert());//gets the staff from the database
 
 
-echo "<layble for='appt_time'> Appointment time:</lable>";
+echo "<layble for='appt_time'> Appointment time:</lable>";//allows user to input a appointment time
 echo "<input type='time' name='appt_time' required>";
 echo "<br>";
 
 
-echo "<layble for='appt_date'> Appointment date:</lable>";
+echo "<layble for='appt_date'> Appointment date:</lable>";//allows user to input the appointment date
 echo "<input type='date' name='appt_date' required>";
 echo "<br>";
 echo "<select name='staff'>";
 
-foreach ($staff as $staf){
+foreach ($staff as $staf){//will go through each staff member assining them the correct tag if they are a docter or nurse
     if($staf["role"] == "doc"){
         $role = "doctor";
     }else if ($staf["role"] == "nur"){
         $role = "nurse";
     }
-    echo "<option value='".$staf["staff_id"]."'>".$role. " ".$staf["surname"]. " Room ".$staf["room"]."</option>";
+    echo "<option value='".$staf["staff_id"]."'>".$role. " ".$staf["surname"]. " Room ".$staf["room"]."</option>";// allows a menu to show each staff and there details like room number
 }
-echo "</select>";
+echo "</select>";//lets user select
 
 echo "<br>";
 
-echo "<input type='submit' name='submit' value='Book Appointment'>";
+echo "<input type='submit' name='submit' value='Book Appointment'>";//allows them to submit and book appoinment
 
 echo "</form>";//end form
 
 echo "<br>";
-echo user_message();//calls the function
+echo user_message();//calls the function to output messages
 echo "<br>";
 echo "<br>";
 

@@ -7,7 +7,7 @@ require_once("assests/common.php");//gets acess to common
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {//checking a super globle to see if the request methord is post to call the page
 
-    $_POST['username'] = filter_var($_POST['username'], FILTER_SANITIZE_EMAIL);
+    $_POST['username'] = filter_var($_POST['username'], FILTER_SANITIZE_EMAIL);//fillters the input to make sure there not entering anything malisues
     $_POST['first_name'] = filter_var($_POST['first_name'], FILTER_SANITIZE_STRING);
     $_POST['surname'] = filter_var($_POST['surname'], FILTER_SANITIZE_STRING);
     $_POST['password'] = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
@@ -15,10 +15,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {//checking a super globle to see if t
 
 
     try {
-        if (password_streagth($_POST['password'])) {
+        if (password_streagth($_POST['password'])) {//checks they have set a strong password
 
             if (!username_check(dbconnect_insert(), $_POST['username'])) {//checks the value returned to see if username id avalible
-                if (new_user(dbconnect_insert(), $_POST)) {
+                if (new_user(dbconnect_insert(), $_POST)) {//commits new user to database
                     auditor(dbconnect_insert(), getnewuserid(dbconnect_insert(), $_POST['username']), "reg", "new user registered");//this logs that a user has registerd and stores in database
                     $_SESSION['usermessage'] = "USER REG SUCCESSFUL";//gives and formats the resutle of the check from common username_check
                 } else {
@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {//checking a super globle to see if t
                 }
             }
         } else {
-            $_SESSION['usermessage'] = "ERROR USER REG FAILED ";
+            $_SESSION['usermessage'] = "ERROR USER REG FAILED ";//catches any other errors that occer and formatt and  outputs them
         }
     } catch (PDOException $e) {
         $_SESSION['usermessage'] = "ERROR USER REG FAILED ". $e->getMessage();
@@ -79,7 +79,7 @@ echo "</form>";//end form
 
 
 echo "<br>";
-echo user_message();//calls the function
+echo user_message();//calls the function to show messages to user
 echo "<br>";
 
 echo "<br>";
