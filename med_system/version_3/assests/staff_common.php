@@ -1,6 +1,6 @@
 <?php
 
-function new_user($conn, $post)//creates fuction
+function s_new_user($conn, $post)//creates fuction
 {
     try{// doing a prepared stament
         $sql = "INSERT INTO doctors (role,surname,username,password,room) VALUES(?,?,?,?,?)";//easy to sql attack
@@ -26,11 +26,11 @@ function new_user($conn, $post)//creates fuction
     }
 }
 
-function user_message()
+function s_user_message()
 {
-    if(isset($_SESSION['usermessage'])){//check if message set
-        $message = "<p>". $_SESSION['usermessage']."</p>";//assinges the massage and styles
-        unset($_SESSION['usermessage']);//unsets message
+    if(isset($_SESSION['s_user_message'])){//check if message set
+        $message = "<p>". $_SESSION['s_user_message']."</p>";//assinges the massage and styles
+        unset($_SESSION['s_user_message']);//unsets message
         return $message;//return message
     }else{//if not met
         $message = "";//set to blank
@@ -39,7 +39,7 @@ function user_message()
 
 }
 
-function username_check($conn, $username)
+function s_username_check($conn, $username)
 {
     try {
         $sql = "SELECT username FROM doctors where username= ?";//sql stament getting usernames from database
@@ -64,15 +64,15 @@ function username_check($conn, $username)
 
 
 
-function auditor($conn, $staff_id, $code, $long)
+function s_auditor($conn, $staff_id, $code, $longdesc)
 {
     $sql = "INSERT INTO staff_audit (date,staff_id,code,longdesc) VALUES(?,?,?,?)";//is an SQL quary that will insert the data into each coloum of the table
     $stmt = $conn->prepare($sql);  //prepare the SQL
-    $date = date("Y-m-d"); //this is the the structer a my sQl feild works and accespts
+    $date = date("Y-m-d"); //this is the structer a my sQl feild works and accespts
     $stmt->bindValue(1, $date);  //bind paramiters for security
     $stmt->bindValue(2, $staff_id);
     $stmt->bindValue(3, $code);
-    $stmt->bindValue(4, $long);
+    $stmt->bindValue(4, $longdesc);
 
     $stmt->execute(); //run the query to insert
     $conn = null;  // close the connection so cant be abused
@@ -80,7 +80,7 @@ function auditor($conn, $staff_id, $code, $long)
 
 }
 
-function getnewuserid($conn, $username)
+function s_getnewuserid($conn, $username)
 {//gets the id of the new user to be able to enter into audit
     try {
         $sql = "SELECT staff_id FROM doctors WHERE username= ?";
@@ -100,7 +100,7 @@ function getnewuserid($conn, $username)
 }
 
 
-function login($conn, $post)
+function s_login($conn, $post)
 {
     try {// try this code
         $conn = dbconnect_insert();//gets database
@@ -114,12 +114,12 @@ function login($conn, $post)
         if ($result) {//if there is a result returned
             return $result;//returns result
         } else {
-            $_SESSION['usermessage'] = "User not found";//send message from error to be printed
+            $_SESSION['s_user_message'] = "User not found";//send message from error to be printed
             header("Location: login.php");//send back to login page
             exit();//exits code
         }
     } catch (PDOException $e) {
-        $_SESSION['usermessage'] = "User login".$e->getMessage();//returns error mesage to output
+        $_SESSION['s_user_message'] = "User login".$e->getMessage();//returns error mesage to output
         header("Location: login.php");//send back to long in page
         exit();//exits code
     }

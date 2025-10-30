@@ -5,6 +5,14 @@ session_start();
 require_once("assests/dbconnect.php");//gets file access
 require_once("assests/staff_common.php");//gets acess to common
 
+
+if (isset($_SESSION['staff_id'])) {
+    $_SESSION['s_user_message'] = "you are already logged in";///checks if user is already logged in and will return message if so
+    header("location:s_index.php");//returns to home page
+    exit;//stop further exicution
+}
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {//checking a super globle to see if the request methord is post to call the page
 
     $_POST['username'] = filter_var($_POST['username'], FILTER_SANITIZE_EMAIL);
@@ -14,14 +22,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {//checking a super globle to see if t
     $_POST['room'] = filter_var($_POST['room'], FILTER_SANITIZE_STRING);
 
 
-      if (!username_check(dbconnect_insert(), $_POST['username'])) {//checks the value returned to see if username id avalible
-            if (new_user(dbconnect_insert(), $_POST)) {
-               auditor(dbconnect_insert(), getnewuserid(dbconnect_insert(), $_POST['username']), "reg", "new user registered");//this logs that a user has registerd and stores in database
-                $_SESSION['usermessage'] = "USER REG SUCCESSFUL";//gives and formats the resutle of the check from common username_check
-            } else {
-                $_SESSION['usermessage'] = "ERROR USER REG FAILED ";//if its not aviblibe it prints this error message
-            }
+    try {
+
+            if (!s_username_check(dbconnect_insert(), $_POST['username'])) {//checks the value returned to see if username id avalible
+                if (s_new_user(dbconnect_insert(), $_POST)) {
+                    s_auditor(dbconnect_insert(), s_getnewuserid(dbconnect_insert(), $_POST['username']), "reg", "new user registered");//this logs that a user has registerd and stores in database
+                    $_SESSION['s_user_message'] = "USER REG SUCCESSFUL";//gives and formats the resutle of the check from common username_check
+                } else {
+                    $_SESSION['s_user_message'] = "ERROR USER REG FAILED ";//if its not aviblibe it prints this error message
+                }
+
+        } else {
+            $_SESSION['s_user_message'] = "ERROR USER REG FAILED ";
         }
+    } catch (PDOException $e) {
+        $_SESSION['s_user_message'] = "ERROR USER REG FAILED ". $e->getMessage();
+    }
+
+    catch (Exception $e) {
+        $_SESSION['s_user_message'] = "ERROR USER REG FAILED ". $e->getMessage();
+    }
 }
 
 echo "<!DOCTYPE html>";//required tag
@@ -41,7 +61,7 @@ require_once "assests/staff_nav.php";
 
 echo "<div class='content'>";// this class is a box that i can put content for my page into
 
-echo "<h2> User register </h2>";//heading
+echo "<h2> staff register </h2>";//heading
 echo "<p> welcome we are so glad your joining us, please fill in the form below </p>";//paragh of text to instruct
 
 
@@ -73,7 +93,7 @@ try{//error handle
 
 
 echo "<br>";
-echo user_message();//calls the function
+echo s_user_message();//calls the function
 echo "<br>";
 
 echo "<br>";

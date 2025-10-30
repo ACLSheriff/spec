@@ -3,15 +3,10 @@
 session_start();
 
 require_once "assests/dbconnect.php";
-require_once "assests/common.php";
+require_once "assests/staff_common.php";
 
 
-if (!isset($_SESSION['userid'])) {
-    $_SESSION['usermessage'] = "you are not logged in";///checks if user is already logged in and will return message if so
-    unset($_SESSION['appid']);
-    header("location:index.php");//returns to home page
-    exit;//stop further exicution
-} elseif($_SERVER["REQUEST_METHOD"] == "POST"){
+if($_SERVER["REQUEST_METHOD"] == "POST"){
 //this should be here so if there is a use of headers it can be done so the rest of teh code dosnt load so teh headers will work and change page without errors becuse the header has loaded
     if(isset($_POST['appdelete'])){
         try{
@@ -46,7 +41,7 @@ echo "<body>";//opens the body of the page
 echo "<div class='container'>";//dive alows you to split your page up and class allows you to style that div
 
 require_once "assests/topbar.php";// gets and displays the top bar
-require_once "assests/navbar.php";// gets and displays nav bar
+require_once "assests/staff_nav.php";// gets and displays nav bar
 
 echo "<div class='content'>";// this class is a box that i can put content for my page into
 
