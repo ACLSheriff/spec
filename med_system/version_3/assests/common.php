@@ -223,14 +223,8 @@ function profile_featch($conn, $user_id)
     $sql = "SELECT * FROM users WHERE user_id = ?";//gets the bookings infomation
     $stmt = $conn->prepare($sql);//prepares SQL statment
 
-    $stmt->bindValue(1, $user_id);// finds the user id and binds to value
-    $stmt->bindValue(1, first_name);
-    $stmt->bindValue(2, surname);
-    $stmt->bindValue(3, username);
-    $hpswd = password_hash(password, PASSWORD_DEFAULT);//built in libray to incrypt
-    $stmt->bindValue(4, $hpswd);
-    $stmt->bindValue(5, d_o_b);
-    $stmt->bindValue(6, adress);// binding the d
+    $stmt->bindValue(1, $_POST['$user_id']);// finds the user id and binds to value
+
     $stmt->execute(); //run the query to insert
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);//
     $conn = null;  // close the connection so cant be abused
@@ -243,13 +237,8 @@ function profile_update($conn, $post)
     $sql = "UPDATE users SET first_name = ?, surname = ? , username = ? ,password = ? , d_o_b = ? , adress = ? WHERE user_id = ?";
     //allows profile to be updated
     $stmt = $conn->prepare($sql);
-    $stmt->bindValue(1, first_name);
-    $stmt->bindValue(2, surname);
-    $stmt->bindValue(3, username);
-    $hpswd = password_hash(password, PASSWORD_DEFAULT);//built in libray to incrypt
-    $stmt->bindValue(4, $hpswd);
-    $stmt->bindValue(5, d_o_b);
-    $stmt->bindValue(6, adress);// binding the data from form to SQL statment this makes it more secure from a SQL injection attack less likly to hijk
+    $stmt->bindValue(1, $_POST['userid']);
+// binding the data from form to SQL statment this makes it more secure from a SQL injection attack less likly to hijk
     $stmt->execute();//exicutes and runs query
     $conn = null;//gets rid of connection
     return true;
