@@ -3,10 +3,10 @@
 function new_user($conn, $post)//creates fuction
 {
     try{// doing a prepared stament
-        $sql = "INSERT INTO users (first_name, surname, username,password, d_o_b, adress) VALUES(?,?,?,?,?,?)";//easy to sql attack
+        $sql = "INSERT INTO users (first_name, surname, username,password, d_o_b, adress) VALUES(?,?,?,?,?,?)";//easy to sql attack bjt sets the SQL statment
         $stmt = $conn->prepare($sql);//prepare sql
 
-        $stmt->bindValue(1, $post['first_name']);
+        $stmt->bindValue(1, $post['first_name']);//binds values
         $stmt->bindValue(2, $post['surname']);
         $stmt->bindValue(3, $post['username']);
         $hpswd = password_hash($post['password'], PASSWORD_DEFAULT);//built in libray to incrypt
@@ -107,12 +107,13 @@ function auditor($conn, $userid, $code, $long)
 
 function staff_getter($conn){
 
-    $sql = "SELECT staff_id, role, surname, room FROM doctors WHERE role != ? ORDER BY role DESC";
+    $sql = "SELECT staff_id, role, surname, room FROM doctors WHERE role != ? ORDER BY role DESC";//sets up SQL stament
+    //gets the staff details from the table in decsding order
 
-    $stmt = $conn->prepare($sql);
-    $exclude_role = "adm";
+    $stmt = $conn->prepare($sql);//prepares SQL statment
+    $exclude_role = "adm";//exclueds and dosnt get any admin staff from the table
 
-    $stmt->bindValue(1,$exclude_role);
+    $stmt->bindValue(1,$exclude_role);//binds value to make sure role is excluded
 
     $stmt->execute(); //run the query to insert
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -125,7 +126,7 @@ function staff_getter($conn){
 function getnewuserid($conn, $username)
 {//gets the id of the new user to be able to enter into audit
     try {
-        $sql = "SELECT user_id FROM users WHERE username= ?";
+        $sql = "SELECT user_id FROM users WHERE username= ?";//sets up SQL stament getting the user a id
         $stmt = $conn->prepare($sql); //prepares SQL
         $stmt->bindValue(1, $username);   //binds paramiters for security
         $stmt->execute(); //run quary to insert
@@ -142,34 +143,34 @@ function getnewuserid($conn, $username)
 }
 
 function commit_booking($conn, $epoch){
-    $sql = "INSERT INTO bookings (user_id, staff_id, aptdate, bookedon) VALUES(?,?,?,?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bindValue(1, $_SESSION['userid']);
+    $sql = "INSERT INTO bookings (user_id, staff_id, aptdate, bookedon) VALUES(?,?,?,?)";//inserts the bookinf details into the booking table
+    $stmt = $conn->prepare($sql);//prepares sql statment
+    $stmt->bindValue(1, $_SESSION['userid']);//binds values
     $stmt->bindValue(2, $_POST['staff']);
-    $stmt->bindValue(3, $epoch);
+    $stmt->bindValue(3, $epoch);//puts in epoch time
     $stmt->bindValue(4, time());
 
-    $stmt->execute();
-    $conn = null;
+    $stmt->execute();//exicutes sql statment
+    $conn = null;//cutts off connection to prevent ecurity breaches
     return true;
 }
 
 function appt_getter($conn)
 {
     $sql = "SELECT b.booking_id, b.aptdate, b.bookedon, s.role, s.surname, s.room FROM bookings b JOIN doctors s ON b.staff_id = s.staff_id WHERE b.user_id = ? ORDER BY b.aptdate ASC";
-// selects the feils from the diffrent tables, it gets them from the bookings table which we have labled b and joins the docters table with have labled s
+    // selects the feils from the diffrent tables, it gets them from the bookings table which we have labled b and joins the docters table with have labled s
     // and use staff id to link together from each table, where it has the user id that that is being used and this will be pulled and orderd by the appiment date in asending order
-    $stmt = $conn->prepare($sql);
+    $stmt = $conn->prepare($sql);//prepares the SQL stament
 
-    $stmt->bindValue(1,$_SESSION['userid']);
+    $stmt->bindValue(1,$_SESSION['userid']);//binds value
 
     $stmt->execute(); //run the query to insert
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);//featches all the results
     $conn = null;  // close the connection so cant be abused
-    if($result){
-        return $result;
+    if($result){//will check if there is a result
+        return $result;//returns result
     } else{
-        return false;
+        return false;//otherwise we can return false
     }
 
 }
@@ -198,20 +199,20 @@ function fetch_appt($conn, $booking_id)
     $stmt->bindValue(1, $booking_id);// finds the booking id and binds to value
 
     $stmt->execute(); //run the query to insert
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);//
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);//featches all results
     $conn = null;  // close the connection so cant be abused
     return $result;//returns the booking info result
 }
 
 function appt_update($conn, $booking_id, $apt_time)
 {
-    $sql = "UPDATE bookings SET staff_id = ?, aptdate = ? WHERE booking_id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bindParam(1, $_POST['staff']);
+    $sql = "UPDATE bookings SET staff_id = ?, aptdate = ? WHERE booking_id = ?";//update bookings and resets the staff and appoimnet date
+    $stmt = $conn->prepare($sql);//prepares stament
+    $stmt->bindParam(1, $_POST['staff']);//binds paramiters that have been changed by user
     $stmt->bindParam(2, $booking_id);
     $stmt->bindParam(3, $apt_time);
-    $stmt->execute();
-    $conn = null;
+    $stmt->execute();//exitutes and runs query
+    $conn = null;// closes connection
     return true;
 
 }
@@ -240,6 +241,7 @@ function profile_featch($conn, $user_id)
 function profile_update($conn, $post)
 {
     $sql = "UPDATE users SET first_name = ?, surname = ? , username = ? ,password = ? , d_o_b = ? , adress = ? WHERE user_id = ?";
+    //allows profile to be updated
     $stmt = $conn->prepare($sql);
     $stmt->bindValue(1, first_name);
     $stmt->bindValue(2, surname);
@@ -248,86 +250,86 @@ function profile_update($conn, $post)
     $stmt->bindValue(4, $hpswd);
     $stmt->bindValue(5, d_o_b);
     $stmt->bindValue(6, adress);// binding the data from form to SQL statment this makes it more secure from a SQL injection attack less likly to hijk
-    $stmt->execute();
-    $conn = null;
+    $stmt->execute();//exicutes and runs query
+    $conn = null;//gets rid of connection
     return true;
 
 }
 
 function password_streagth($pwd){
 
-    $checker = 0;
-    $results = array();
+    $checker = 0;//sets checker to 0
+    $results = array();//creates an array
 
-
-    $tmp = len_checker($pwd);
-    $checker+=$tmp;
-    if ($tmp==1){
+//each section of code here is getting the value from the subroutine and adding to the checker if it has passed or not
+    $tmp = len_checker($pwd);//calles function
+    $checker+=$tmp;//adds value returned to checker
+    if ($tmp==1){//if it is correct can return messages
         $results["len"] = "SUCCESS: Length Check Passed";
     } else {
         $results["len"] = "FAILED: Length Check FAILED";
     }
 
-    $tmp = check_upper($pwd);
-    $checker+=$tmp;
+    $tmp = check_upper($pwd);//calles function
+    $checker+=$tmp;//adds value returned to checker
     if ($tmp==1){
         $results["len"] = "SUCCESS: uppercase Check Passed";
     } else {
         $results["len"] = "FAILED: uppercase Check FAILED";
     }
 
-    $tmp = check_lower($pwd);
-    $checker+=$tmp;
+    $tmp = check_lower($pwd);//calles function
+    $checker+=$tmp;//adds value returned to checker
     if ($tmp==1){
         $results["len"] = "SUCCESS: lowercase Check Passed";
     } else {
         $results["len"] = "FAILED: lowercase Check FAILED";
     }
 
-    $tmp = char_special($pwd);
-    $checker+=$tmp;
+    $tmp = char_special($pwd);//calles function
+    $checker+=$tmp;//adds value returned to checker
     if ($tmp==1){
         $results["len"] = "SUCCESS: special charecter Check Passed";
     } else {
         $results["len"] = "FAILED: special charecter Check FAILED";
     }
 
-    $tmp = password_check($pwd);
-    $checker+=$tmp;
+    $tmp = password_check($pwd);//calles function
+    $checker+=$tmp;//adds value returned to checker
     if ($tmp==1){
         $results["len"] = "SUCCESS: password word Check Passed";
     } else {
         $results["len"] = "FAILED: password word Check FAILED";
     }
 
-    $tmp = digit_check($pwd);
-    $checker+=$tmp;
+    $tmp = digit_check($pwd);//calles function
+    $checker+=$tmp;//adds value returned to checker
     if ($tmp==1){
         $results["len"] = "SUCCESS: digit Check Passed";
     } else {
         $results["len"] = "FAILED: digit Check FAILED";
     }
 
-    $tmp =  last_special_char($pwd);
-    $checker+=$tmp;
+    $tmp =  last_special_char($pwd);//calles function
+    $checker+=$tmp;//adds value returned to checker
     if ($tmp==1){
         $results["len"] = "SUCCESS: last letter special charecter Check Passed";
     } else {
         $results["len"] = "FAILED: last letter special charecter Check FAILED";
     }
 
-    $tmp = check_first_special($pwd);
-    $checker+=$tmp;
+    $tmp = check_first_special($pwd);//calles function
+    $checker+=$tmp;//adds value returned to checker
     if ($tmp==1){
         $results["len"] = "SUCCESS: first letter special charecter Check Passed";
     } else {
         $results["len"] = "FAILED: first letter special charecter Check FAILED";
     }
 
-    if ($checker > 7) {
-        return true;
+    if ($checker > 7) {//checks all the checks have passed
+        return true;//if so it will return true
     }else{
-        $_SESSION['usermessage'] = "your password has failed 1 or more complexity tests ";
+        $_SESSION['usermessage'] = "your password has failed 1 or more complexity tests ";//if its failed the checks if will produce this message to user
         return false;
     }
 
